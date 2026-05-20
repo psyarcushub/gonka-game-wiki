@@ -1,0 +1,75 @@
+---
+title: Gonka Game Wiki
+---
+
+import { Cards, Steps, Callout } from 'nextra/components'
+
+# Gonka Game Wiki
+
+База знаний по проекту **AI Compute Orchestration Layer** — мульти-сетевой инфраструктуре с геймифицированным интерфейсом в Telegram.
+
+<Callout type="info" emoji="📄">
+  Источник: презентация *AI Compute Orchestration Layer* (9 слайдов, RU).
+  Дата обработки: **2026-05-20**.
+</Callout>
+
+## С чего начать
+
+<Cards>
+  <Cards.Card
+    title="Подробный обзор"
+    href="/analysis"
+    arrow
+  >
+    Главный документ. Объясняет проект с нуля — для человека, который вообще не в курсе AI, GPU, токенов и децентрализованных сетей. С аналогиями и моим критическим разбором.
+  </Cards.Card>
+  <Cards.Card
+    title="Глоссарий терминов"
+    href="/knowledge-base/00-glossary"
+    arrow
+  >
+    Расшифровка ~50 терминов: GPU, CUDA, нода, токен, vesting, оркестрация, mining pool и т.д.
+  </Cards.Card>
+  <Cards.Card
+    title="Оригинал презентации"
+    href="/source/presentation-original"
+    arrow
+  >
+    Полный текст всех 9 слайдов в markdown.
+  </Cards.Card>
+</Cards>
+
+## База знаний по разделам
+
+<Steps>
+
+### Контекст проекта
+
+- [Обзор](/knowledge-base/01-overview) — проект одним взглядом
+- [Технические вызовы](/knowledge-base/02-technical-challenges) — какую боль решает
+
+### Архитектура и работа
+
+- [Архитектура системы](/knowledge-base/03-architecture) — 4 слоя сверху вниз
+- [Жизненный цикл ноды](/knowledge-base/04-node-lifecycle) — 5 этапов
+- [Адаптеры сети](/knowledge-base/05-network-adapters) — главный архитектурный трюк
+
+### Экономика и продукт
+
+- [Экономика](/knowledge-base/06-economics) — структура затрат и дохода
+- [Игровой слой](/knowledge-base/07-game-layer) — зачем геймификация
+- [Риски](/knowledge-base/08-risks) — 4 категории риска и защита
+
+### Планирование
+
+- [Дорожная карта](/knowledge-base/09-roadmap) — три фазы за 12 месяцев
+
+</Steps>
+
+## Главный принцип проекта
+
+<Callout type="warning" emoji="🎯">
+  **Инфраструктура первым. Валидация вторым. Геймификация последним.**
+</Callout>
+
+Это не просто красивые слова — это явная дисциплина запуска. Команда декларирует: не масштабироваться, пока не доказана экономика одного GPU. Подробнее → [Дорожная карта](/knowledge-base/09-roadmap).
