@@ -54,14 +54,8 @@ const config: DocsThemeConfig = {
         property="og:description"
         content="База знаний по проекту AI Compute Orchestration Layer"
       />
-      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </>
   ),
-  useNextSeoProps() {
-    return {
-      titleTemplate: '%s — Gonka Game Wiki',
-    }
-  },
 }
 
 export default config
