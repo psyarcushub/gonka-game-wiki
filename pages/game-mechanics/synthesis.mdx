@@ -8,8 +8,12 @@ import { Callout, Steps, Cards } from 'nextra/components'
 
 > Если читать только одну страницу из всего раздела — читай эту. Сводка из 5 проходов в конкретные решения.
 
+<Callout type="error" emoji="⛔">
+**КРИТИЧЕСКАЯ ПОПРАВКА (после feedback оператора)**: ранее в этом документе был тезис «гибрид 4 жанров, включая tap-to-earn для acquisition». **Это была ошибка**. Tap-to-earn механика **мёртва** в Telegram (Notcoin team сами это публично признали в 2025, см. Pass 1). Аудитория устала от кликеров и реагирует на них как на спам. Использовать tap даже для onboarding = убить проект на старте.
+</Callout>
+
 <Callout type="warning" emoji="🎯">
-**Главный тезис**: Gonka должна быть **гибридом 4 жанров одновременно** — tap-to-earn (для acquisition), idle tycoon (для core loop), portfolio strategy (для depth), DePIN dashboard (для truth-layer). Ни один жанр в одиночку не выдерживает D30+ удержания. Это уже доказали Hamster Kombat (-86% за 3 месяца), Pi Network (trust erosion), Axie Infinity (-99.5% за год). Микс — единственный путь.
+**Главный тезис (исправленный)**: Gonka должна быть **гибридом 3 опор**: **idle tycoon** (core loop), **portfolio strategy** (depth), **real DePIN dashboard** (truth-layer). Onboarding — **story-driven + instant utility demo**, не tap. Это и есть pivot, который Notcoin сделал сам в 2025. Гибрид трёх — единственный путь, который выдерживает D30+ в современной TG-аудитории.
 </Callout>
 
 ## 1. Топ-12 механик — приоритетный список
@@ -28,14 +32,21 @@ import { Callout, Steps, Cards } from 'nextra/components'
 
 **Правило**: придерживайся метафоры **во всех экранах**. Не миксуй «alchemist» + «factory» + «fleet commander».
 
-#### 2. Tap-to-mine как acquisition-only
+#### 2. Story-driven onboarding + instant utility demo (НЕ tap!)
 
-**Источник**: Pass 1 (Notcoin sunset признание), Pass 2.
+**Источник**: Pass 1 (Notcoin сами признали tap мёртвым и pivot'нулись в «story-driven»), Pass 5 (Marvel Snap themed seasons).
 
-**Что**: тап — только первые 30 секунд. Каждый тап = «инференс-цикл» / hash. Через 5 минут разблокируется **passive PPH** (profit-per-hour), и тап становится бустером, не основной механикой.
+<Callout type="error" emoji="🚫">
+**АНТИ-РЕКОМЕНДАЦИЯ**: НЕ использовать tap-to-mine в любой форме — ни как onboarding, ни как booster. TG-аудитория видела Hamster/Notcoin/Catizen/Blum/MemeFi/X-Empire/Time-Farm и десятки клонов. Большой палец на монете = мгновенный сигнал «ещё один кликер» = закрытие. Notcoin team сами объявили tap-to-earn мёртвым.
+</Callout>
+
+**Что делать вместо**:
+- **Cold open в narrative**: первый экран — не «тапай монету», а **визуальный hook** (живая нода-существо, дашборд с реальными AI-задачами идущими через сеть, факция-альянс выбирает игрока). В первые 10 секунд игрок видит, что это **не клон Hamster**.
+- **Instant utility demo (уникально для Gonka)**: в первые 30 секунд показать, что **реальная** AI-задача прошла через выделенную игроку ноду. Не симуляция — настоящий inference из Bittensor/Render/io.net. Игрок видит на экране результат (сгенерированный текст / маленькая картинка / классификация) с подписью «это сделала твоя нода». Это **невозможно ни в одной другой TG-игре**, потому что у них нет реальной инфры под капотом.
+- **Cosmetic-first identity**: дать игроку customize свою ноду визуально до первой механики. Personal stake без grind.
 
 **Phase transitions** (явные, не скрытые):
-- Phase 1 (Day 0-7): **Solo Operator** — manual tap, manual выбор сети
+- Phase 1 (Day 0-7): **Solo Operator** — выбор первой ноды, alliance, наблюдение первых earnings
 - Phase 2 (Day 7-30): **Network Builder** — automation, managers, optimal routing
 - Phase 3 (Day 30+): **Empire / DAO Era** — governance, treasury, strategic positioning
 
@@ -61,13 +72,17 @@ node_cost(n) = base × 1.10^n      // удвоение каждые ~7 нод
 
 Milestone bonuses: **5 нод одного типа** → ×2 multiplier, **25** → ×4, **100** → ×10.
 
-#### 4. Daily combo + cipher
+#### 4. Daily strategic decision (не «combo» в стиле Hamster)
 
-**Источник**: Pass 1 (Hamster Kombat).
+**Источник**: Pass 3 (Bittensor subnet выбор как daily strategy), Pass 5 (Marvel Snap location reveal).
 
-**Daily combo**: 3 правильных апгрейда в день (cooling mod + driver patch + workload assign) → bonus. **Решение шарабельно** — третьи Telegram-каналы будут постить утечки = parallel distribution.
+<Callout type="warning">
+Изначально здесь была рекомендация «Daily combo + cipher» в стиле Hamster Kombat. **Это убрано** — копирование Hamster-механик токсично для аудитории. Daily-возврат должен быть через **осмысленное стратегическое решение**, не через «правильную комбинацию из 3 карт».
+</Callout>
 
-**Daily cipher**: Morse-tap на ноду (точка/тире) — задействует core tap-жест как puzzle. **«Network ping puzzle»**.
+**Daily strategic call**: каждые 24 часа сеть публикует **рыночные условия** (какой subnet horячее, где сейчас высокий спрос, какая нагрузка ожидается). Игрок принимает **одно стратегическое решение в день**: на какую сеть/subnet направить compute, сколько cooling allocation, какой workload priority. Это даёт reason возвращаться + создаёт **viewable content** (топ-стратеги делятся анализом в TG-каналах = organic distribution).
+
+**Skill check, не puzzle**: вместо «угадать 3 карты» — **prediction round**: «Какой AI-event завтра принесёт больше всего наград?». Кто угадал лучше — бонус. Это **создаёт информационный meta-game** на основе реальной AI-индустрии (что и так обсуждается в Twitter/X), не на основе слитых combo-цепочек.
 
 #### 5. Streak freeze для uptime
 
@@ -308,9 +323,10 @@ Repute и achievements конкретной ноды переносятся в *
 ## 6. Anti-patterns checklist (NO-LIST)
 
 <Callout type="error" emoji="⛔">
-Эти 12 паттернов **запрещены** в Gonka. Каждый разбил какой-то проект.
+Эти паттерны **запрещены** в Gonka. Каждый разбил какой-то проект.
 </Callout>
 
+- [ ] **🚫 САМЫЙ ВАЖНЫЙ: НЕ копировать tap-to-earn в любой форме** — гигантская монета, daily tap, energy refill, hamster-CEO нарратив. TG-аудитория уже видела Hamster/Notcoin/Catizen/Blum/MemeFi/X-Empire/Time-Farm. Реакция: «опять кликер» → закрытие. *Notcoin team сами объявили tap-to-earn модель мёртвой в 2025.*
 - [ ] **НЕ** пытаться сразу Phase 3 (геймификация) до доказанной экономики. *Презентация декларирует, держим линию.*
 - [ ] **НЕ** обещать life-changing airdrop. *Hamster: 88.75% claim + скрытый vesting → -70% за неделю.*
 - [ ] **НЕ** скрывать vesting cliffs в TGE. *Сразу прозрачно — иначе backlash.*
@@ -357,8 +373,12 @@ Repute и achievements конкретной ноды переносятся в *
 
 ## Итог в одной мысли
 
+<Callout type="error" emoji="🚫">
+**Никакого тапа. Никаких кликеров. Никаких хомяков-CEO.** Аудитория Telegram прошла через Hamster/Notcoin/Catizen/Blum/MemeFi и десятки клонов. Большой палец на гигантской монете = мгновенный триггер «опять кликер» = закрытие. Любая копия этих механик в 2026 году = смерть проекта на запуске.
+</Callout>
+
 <Callout type="warning" emoji="🎯">
-**Не строить ещё один Hamster Kombat.** Строить **первую DePIN-игру, где экономика реальная, а игра поверх неё — настоящий продукт**. Hamster был пустотой с тапом. Notcoin признал, что тап-only мёртв. Gonka имеет то, чего у них не было — **реальную мульти-сетевую инфраструктуру под капотом**. Игровой слой — обёртка, которая делает её доступной, а не способ симулировать ценность, которой нет.
+**Что строить вместо**: первую DePIN-игру, где **экономика реальная**, **AI-задачи проходят через ноду игрока в реальном времени**, а игра поверх — **стратегия + identity + community**, не симуляция эффорта. Главное отличие от Hamster: у нас под капотом **реальная мульти-сетевая инфраструктура** обслуживающая реальный AI-инференс. Игровой слой делает её доступной массовому пользователю — но **не имитирует майнинг**, а **визуализирует реальную работу**. Каждый «упгрейд» меняет реальный workload assignment. Каждый «доход» приходит из реального inference. Это не игра в крипту, это **геймифицированный интерфейс к реальной экосистеме**.
 </Callout>
 
 ## Куда дальше
