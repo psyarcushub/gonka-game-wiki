@@ -1,0 +1,221 @@
+---
+title: Pass 3 — DePIN × Gaming crossovers
+---
+
+import { Callout } from 'nextra/components'
+
+# Pass 3 — DePIN × Gaming crossovers
+
+> Фокус: как существующие DePIN-проекты геймифицируют операционную сложность. Helium, Render, io.net, Salad, Bittensor, Pi Network, Aethir, Akash, Filecoin.
+
+## Как DePIN-проекты переводят инфру в игру
+
+### Helium — карта планеты как игровое поле
+
+Helium превратил скучный IoT-mining в **географическую игру**. Helium Explorer = Mapbox GL JS + hexagonal grid поверх глобуса. Каждый hotspot — точка на карте с активностью, witness-радиусом, earnings. **Mappers app** — пользователи буквально ходят с телефоном и «размечают» зоны покрытия, получая HNT за каждое подтверждение. Pokemon Go механика на крипте.
+
+UX-ход — **hex-grid как игровая сетка**: каждый шестиугольник имеет свой rewards scale (0.0-1.0), визуально подсвечивая зоны где нужна больше покрытия. Превращает фундаментальную проблему network density в **визуальную головоломку**.
+
+### Render — рендеринг как gamified mining
+
+Render Foundation Dashboard показывает в реальном времени **2M+ OctaneBench compute**, frames rendered (>22M в 2025), token emissions/burns. Ключевой UX-приём — **OctaneBench Hours (OBh)** как унифицированный «score» вместо абстрактного hash power. Понятный игровой счётчик: «ты делаешь X OBh/час → получаешь Y RENDER».
+
+**90% emissions → node operators, 10% → availability rewards.** Dashboard визуализирует как два progress bar'а: «работа» и «доступность».
+
+### io.net — Worker portal с финансовой прозрачностью
+
+IO Worker (worker.io.net) — ReactJS + FastAPI + WebSocket-like real-time. Дашборд разделён на:
+- **Worker Homepage** — health monitoring, rename/delete device
+- **Device Detail** — traffic, connection, operation history
+- **Earnings & Rewards** — отдельная вкладка, **каждая транзакция кликабельна в Solscan**
+
+Главная UX-фишка — **transparency layer**: каждая reward имеет ссылку на explorer. Превращает «слепое доверие» в **proof-based UX**, где геймер видит каждый выплачиваемый cent. Это **прямой контр-Pi-Network** (см. ниже).
+
+### Bittensor — субнеты как стратегические лиги
+
+Bittensor с **Dynamic TAO (Feb 2025)** реально стал **«sports league + marketplace»** по официальной аналогии. **128 активных subnets (April 2026)**, каждый — отдельная арена со своей метрикой (text-prompting, image-gen, prediction markets). **Validators «watch the game, score the results». Miners «compete to deliver»**. Это PvP-структура **на уровне протокола**.
+
+UX-pattern: **выбор subnet — стратегическое решение**. Не «запусти ноду и забудь», а «куда я аллоцирую stake/compute». Близко к **deck-building / faction-choice** играм.
+
+### Pi Network — tap-to-mine как обманчивая простота
+
+Pi достиг ~47M активных. Механика — **один тап в день** на молнию. Технически ничего не майнится локально — это **off-chain симуляция** на серверах Pi. UX-урок: **низкий порог + ежедневный ритуал + социалка (security circles)** = массовое retention.
+
+**Anti-pattern**: 5+ лет без mainnet и торгуемого токена → **trust erosion**. Pi показал, что *gamification без реальной экономики долго не живёт*. Многие чувствуют «у меня украли время».
+
+### Salad Cloud — chef-метафора как мастер-класс
+
+Salad построил весь UX вокруг **kitchen language**:
+
+| Технический термин | Salad-vocabulary |
+|---|---|
+| Пользователь | **Chef** |
+| GPU | **Chopping Power** |
+| Earnings | **Salad Balance** |
+| Rewards | gift cards / PayPal |
+| Tier-up | **Star Chef status** |
+| Progression | **20 XP Levels** по сезонам |
+
+Season 1 — **413 пользователей** дошли до Lvl 20, Season 2 — **1,489**. Полноценная RPG-прогрессия поверх infrastructure.
+
+**Ключевой инсайт**: метафора **полностью переименовывает каждый технический термин**. Снижает когнитивную нагрузку, создаёт identity («я Chef, не GPU operator»).
+
+### Aethir — Checker Nodes как лёгкая точка входа
+
+Aethir разделил роли:
+- **Checker Nodes** (10% supply + 5% bonus) — лёгкий мониторинг, низкий порог
+- **Aethir Edge** (23% supply) — реальное hardware, для pros
+
+**Tiered participation**: новички начинают с Checker, pros — с Edge. Dashboard показывает real-time utilization + GPU capacity + earnings.
+
+### Akash — Provider Console + Earnings API
+
+Akash развил **Provider Console** (GUI вместо CLI). Август 2025 — **Provider Earnings API v1** для programmatic access. **Headless UX**: позволь провайдерам встроить earnings в свои дашборды/бухгалтерию. Урок: **давай API наряду с UI** — power-users делают свои dashboards.
+
+### Filecoin — reputation как игровой score
+
+**Filrep.io** + **Starboard SP Dashboard** ранжируют SP по: Capacity Growth, Gas Efficiency, Storage Reliability. **Leaderboard-driven UX**, где SP конкурируют за rank.
+
+### Telegram-нативные предки UX
+- **Notcoin**: 35M+ юзеров, NOT на TON, $1.1B market cap. Leaderboards + boosts + missions.
+- **Hamster Kombat**: 300M+, «hamster CEO of crypto exchange», card-based passive income. Daily Combo (3 правильные карты из сотен → 5M coins).
+
+## UX patterns — real-time earnings dashboards
+
+| Pattern | Реализация в DePIN | Применение в Gonka |
+|---|---|---|
+| **Live earnings ticker** | io.net real-time через FastAPI + React, mining pools через WebSocket | «Сегодня: +X.XX GONKA» обновляется каждые 5-10 сек |
+| **«Last claim» push** | Pi daily prompt, CryptoTab push-notify | TG push «ваша нода готова к claim» |
+| **Network health viz** | Aethir GPU Dashboard global utilization heatmap | Глобальная карта Bittensor/Render/io.net subnets с heat-zones |
+| **Hash/compute → метафора** | Salad «Chopping Power», OctaneBench Hours | «Reactor output» или «Тонн вычислений / час» |
+| **Multi-network status** | Bittensor 128 subnet picker | Tabs «Bittensor / Render / io.net / Akash» с per-network APR |
+| **Hex-grid coverage map** | Helium Explorer | Сектора планеты с разными «клиент-сетями» |
+
+**Технически**: WebSocket + 1-2 sec poll fallback. React/Vue компоненты с **optimistic UI** для claim-кнопок («+X» до tx confirmation).
+
+## Reward visualization patterns
+
+1. **Vesting bars** — «claimed / claimable / locked / future»
+2. **Multipliers** — Hamster boost cards, CryptoTab Cloud.Boost (до 300×). «Active boost: 2× for 4h 32m» с countdown
+3. **Tier rewards** — Aethir Checker tiers, Salad Star Chef, Filecoin reputation
+4. **Historical charts** — Helium per-hotspot 30/90/365 дней, Render burn-vs-mint graph
+5. **Streak counters** — Hamster Daily Combo, Pi 24h tap streak
+6. **Comparative leaderboard** — локальный rank («ты в топ-1.2%») + глобальный
+
+## Конкретные применения к Gonka
+
+### «Узлы планеты» (Helium hex-map)
+
+3D-globe (Mapbox или Three.js), хексы подсвечены по типу нагрузки:
+- 🔵 синий — Bittensor inference
+- 🟠 оранжевый — Render frames
+- 🟢 зелёный — io.net AI training
+
+Тап на гекс → попап с node stats + claim CTA. **Mockup**: размещение «узла» на карте + выбор специализации.
+
+### «Стратегические альянсы» (Bittensor subnet metaphor)
+
+Игрок **выбирает фракцию**:
+- **Subnet 1: Text Generation Guild**
+- **Subnet 23: Image Renderers Brotherhood**
+- **…**
+
+Каждый альянс — фракция со своим лором, эмиссией, скиллом-деревом. **Faction-select экран** в стиле «выбери класс» — 3-5 карточек с art-style, описанием, expected APR, current node count. Switch button с cooldown (как realloc в Bittensor).
+
+### Chef-метафора → Gonka вариант
+
+«**Ваша GPU — печь алхимика**». AI-сети — клиенты-маги, заказывающие «трансмутацию данных». Earnings — кристаллы плазмы (привязка к ExoPlanet plasma narrative, если объединять экосистему).
+
+Альтернативы:
+- **«Reactor»** — энергетический реактор, нагрузка = «fission orders»
+- **«Forge»** — кузница, crafting orders
+- **«Lab»** — лаборатория, experiment requests
+
+### Конкретные UI mockup ideas
+
+**Главный экран Mini-App:**
+- Top: live earnings ticker «+0.0234 GONKA/min» с sparkline-графиком
+- Center: 3D-глобус с активными нодами игрока
+- Side: 4 карточки текущих «Заказчиков» (Bittensor/Render/io.net/Akash) с per-network APR
+- Bottom: 3 CTA — «Claim» / «Upgrade Node» / «Switch Alliance»
+
+**Node detail screen:**
+- Hash rate как «Energy Output: 142 TFLOPS»
+- Tier badge (Bronze/Silver/Gold/Platinum)
+- Streak counter «12 days online»
+- Multipliers active: «2× boost — 3h 22m left»
+- Recent rewards: 7-day chart с hover-tooltips
+
+**Subnet/Network picker:**
+- Faction-style cards с art (как Hearthstone deck select)
+- Per-faction APR, node count, твой rank
+- Switch button с cooldown timer
+
+## Что НЕ делать — anti-patterns
+
+### Helium-style overcompensation
+
+Ранние юзеры разместили **тысячи hotspots в low-demand zones** только ради rewards. Network grew supply-side но не demand-side. Burn-and-mint спас, но репутация пострадала.
+
+**Урок для Gonka**: rewards привязаны к **реальной утилизации**, не к «node exists». Поставил ноду в «пустую» зону без AI-traffic — низкие или нулевые rewards. Иначе инфляция убьёт токеномику.
+
+### Pi Network «fake mining» trust erosion
+
+Если показываешь «майнинг» — он должен **реально что-то делать**. Gonka либо реально оркестрирует DePIN-работу, либо **честно говорит** «это симуляция, токен запустится в Q3». Никогда — обманчивая «псевдо-работа».
+
+### HiveOS / Awesome Miner — pro-only complexity
+
+**Никаких CLI-paradigms, никаких «advanced configuration»** на главных экранах. Power-features прячутся в «Pro Mode» toggle. Gonka — Telegram Mini-App, аудитория **не системные администраторы**.
+
+### Worldcoin orb friction
+
+Для claim WLD — физически найти Orb и просканировать iris. Огромный onboarding friction.
+
+**Урок**: minimize friction at first earn. Первый GONKA — за tap. Только потом KYC/wallet/upgrades.
+
+### NiceHash / Awesome Miner — слишком много метрик
+
+Hash rate, accepted/rejected shares, temperature, power draw, profit calc, switching algos — **information overload**.
+
+**Урок**: один главный KPI («earnings/min») + 2-3 second-level metrics. Остальное в отдельные tabs.
+
+## Неочевидные insights
+
+### (1) Метафора важнее механики
+
+Salad с **chef framing** удерживает Chefs в 2-3× дольше generic «Crypto Mining App» UI (Season retention data 413→1489 Lvl 20 chefs YoY). Hamster Kombat взлетел **не из-за tap-механики** (она была у Notcoin), а из-за **CEO-hamster identity + card upgrade tycoon-loop**.
+
+**Для Gonka**: **выбери одну сильную метафору и придерживайся её во всех экранах** — не смешивай «alchemist», «factory», «fleet commander».
+
+### (2) Multi-network = strategy layer (уникально для Gonka)
+
+Большинство DePIN-проектов работают с **одной сетью**. Gonka оркестрирует 5+ сетей (Bittensor + Render + io.net + Akash + Gensyn). Это даёт **strategy layer**, которого нет ни у Salad/Helium/Render mobile app: **геймер реально принимает решение «к какой сети подключиться сейчас»**. Близко к **portfolio management** играм (типа Bitlife financial choices).
+
+Конкретно: показывай real-time APR каждой сети на главном экране, переключение с **5-10 мин cooldown**, награждай за угадывание «next hot subnet» (multiplier за раннюю миграцию). Превращает passive mining в **active alpha-hunting**.
+
+### (3) Transparency как gamification
+
+io.net построил UX вокруг **explorer-clickable transactions**. Контр-интуитивный приём: **показывай блокчейн-правду**, и пользователь воспринимает earnings как «реальные деньги», не игровые очки.
+
+**Для Gonka**: каждый earned GONKA имеет **traceable origin** («Earned: 0.42 GONKA from Bittensor Subnet 7 — view tx»). Доказательство работы **усиливает retention** через эффект «я владею чем-то реальным». Противоположно Pi Network.
+
+## Источники
+
+- [Helium Mappers (gamified coverage)](https://mappers.helium.com/)
+- [Helium Explorer (deprecated, but hex-grid example)](https://explorer.helium.com)
+- [Mapbox + Helium showcase](https://www.mapbox.com/showcase/helium)
+- [Render Foundation Dashboard](https://stats.renderfoundation.com)
+- [io.net Worker Portal](https://worker.io.net)
+- [Akash Provider Console + Earnings API](https://akash.network/docs/providers)
+- [Aethir Dashboard](https://dashboard.aethir.com/protocol/ecosystem)
+- [Salad Star Chef qualifications](https://support.salad.com/guides/using-salad/star-chef-qualifications-and-benefits/)
+- [Salad Community](https://community.salad.com)
+- [Filrep — Filecoin reputation leaderboard](https://filrep.io)
+- [Bittensor Subnets docs](https://docs.learnbittensor.org/subnets/understanding-subnets)
+- [Messari io.net deep dive](https://messari.io/report/understanding-io-net-a-comprehensive-overview)
+- [Messari Render Network](https://messari.io/report/understanding-the-render-network-a-comprehensive-overview)
+- [Messari Akash Q4 2025](https://messari.io/report/state-of-akash-q4-2025)
+- [Helium lessons (case study)](https://medium.com/@hilary.h.brown/from-hype-to-fundamentals-helium-depin-4bc466e868d4)
+- [DePIN gamification trends 2025](https://medium.com/@almaxdesignagency/gamification-in-ui-ux-2025-slay-the-game-or-get-slapped-by-it-plus-clever-tricks-to-keep-em-36f86faeefe4)
+- [Pi Network 2026 status (Coin Bureau)](https://coinbureau.com/education/pi-network-explained)
+- [Hamster Kombat TMA build guide](https://games.themindstudios.com/post/bulding-tap-to-earn-telegram-game/)

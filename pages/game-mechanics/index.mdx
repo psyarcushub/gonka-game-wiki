@@ -1,0 +1,94 @@
+---
+title: Гейм-механики — обзор ресерча
+---
+
+import { Callout, Cards, Steps } from 'nextra/components'
+
+# Гейм-механики — глубинный ресерч
+
+<Callout type="info" emoji="🔬">
+**5 проходов × 5 разных углов × 1 финальный синтез.**
+Дата ресерча: **2026-05-22**. Все источники цитированы внутри каждого паса.
+</Callout>
+
+## Зачем этот раздел
+
+Презентация Gonka Game объявляет, что игровой слой — критическая часть проекта (см. [Игровой слой](/knowledge-base/07-game-layer)). Но в самой презентации **конкретных механик нет** — только декларация «прогрессия, апгрейды, лидерборды, сезоны». Этот раздел заполняет пустоту: что именно, какие числа, какие библиотеки, какие паттерны, что НЕ делать.
+
+## Методология — 5 параллельных проходов
+
+Вместо одного «глубокого» ресерча — 5 независимых проходов с разными ракурсами. Это страховка от blind spots: один угол показывает одно, другой видит то, что первый пропустил.
+
+<Steps>
+
+### Pass 1 — [Telegram tap-to-earn феномен](/game-mechanics/pass-1-telegram-taps)
+Hamster Kombat (300M→41M за 3 месяца), Notcoin ($0 ad spend → 4.1M юзеров за неделю), Catizen ($34M revenue, 30% payment rate), TapSwap, Blum, MemeFi. **Что работало → что убило → что копировать**.
+
+### Pass 2 — [Idle / Tycoon / Simulator механики](/game-mechanics/pass-2-idle-tycoon)
+Cookie Clicker, AdVenture Capitalist, Universal Paperclips, Idle Miner Tycoon, Antimatter Dimensions. 13 лет отработанных формул прогрессии, престижа, multiplier stacking. **Конкретные числа кривых**.
+
+### Pass 3 — [DePIN × Gaming crossovers](/game-mechanics/pass-3-depin-crossovers)
+Helium (гекс-карта), Render (OctaneBench), io.net (transparent tx), Salad (chef-метафора), Bittensor (subnet alliances), Pi Network (anti-pattern). **Как DePIN-проекты геймифицируют операционную сложность**.
+
+### Pass 4 — [GitHub open-source примеры](/game-mechanics/pass-4-github-oss)
+15+ репозиториев: forkable стартеры, idle frameworks, TMA-шаблоны, библиотеки huge-numbers, state management паттерны. **Конкретный технический стек**.
+
+### Pass 5 — [UX-тренды 2025-2026](/game-mechanics/pass-5-ux-trends)
+Battle Pass anti-FOMO, gacha с transparent pity, Duolingo streaks, dynamic NFTs, account abstraction (EIP-7702), AI generative content, paymasters. **Что цепляет Gen Z сейчас**.
+
+### Финальный синтез → [Рекомендации для Gonka](/game-mechanics/synthesis)
+Из 5 проходов вытянут общий список: топ-12 механик, конкретные cost curves, рекомендуемый tech stack, phased roadmap для game layer, 3 уникальных angle.
+
+</Steps>
+
+## TL;DR — ключевые выводы из всех 5 проходов
+
+<Callout type="warning" emoji="🎯">
+**Главный вывод**: Gonka должна быть **гибридом 4 жанров одновременно** — tap-to-earn (acquisition), idle tycoon (core loop), strategy/portfolio (depth), DePIN dashboard (truth-layer). Ни один жанр в одиночку не выдерживает D30+ удержания.
+</Callout>
+
+### Что точно делать
+
+| # | Механика | Откуда |
+|---|---|---|
+| 1 | **Tap-to-earn только как onboarding** (первая сессия), потом прогрессия в idle | Pass 1 (Notcoin sunset), Pass 2 |
+| 2 | **Cost curve multiplier 1.10-1.12** для мягкости (массовая аудитория) | Pass 2 |
+| 3 | **Daily combo** (3 правильных апгрейда в день → bonus) | Pass 1 (Hamster) |
+| 4 | **5-tier hardware ladder** (Gaming GPU → … → Cluster) | Pass 1 (Notcoin leagues) |
+| 5 | **Multi-network faction picker** (Bittensor / Render / io.net / Akash) | Pass 3 (Bittensor subnets) |
+| 6 | **Salad-style chef-метафора** — переименовать ВСЁ техническое в одной метафоре | Pass 3 |
+| 7 | **Helium hex-grid карта** для «узлов планеты» | Pass 3 |
+| 8 | **Transparent tx-explorer ссылки** на каждый earned token | Pass 3 (io.net) |
+| 9 | **Anti-FOMO battle pass** (прогресс не сгорает) | Pass 5 (Marvel Rivals) |
+| 10 | **Streak freeze** для uptime — humane, не наказывает за блэкаут | Pass 5 (Duolingo) |
+| 11 | **Soulbound achievements** + dynamic NFT для ноды | Pass 5 |
+| 12 | **Compute Guilds** с пулом задач + leaderboards | Pass 5 (Clash of Clans + Hay Day) |
+
+### Что точно НЕ делать
+
+| # | Anti-pattern | Откуда |
+|---|---|---|
+| 1 | Pay-to-win premium currency | Pass 2 |
+| 2 | Mandatory rewarded ads в core loop | Pass 2 |
+| 3 | Token-as-yield Ponzi (Axie lesson) | Pass 2, Pass 5 |
+| 4 | Pi Network «fake mining» (показывать работу, которая не делается) | Pass 3 |
+| 5 | Hidden vesting cliffs (Hamster lesson) | Pass 1 |
+| 6 | AI slop art (Hamster крах) | Pass 1 |
+| 7 | Hostile anti-cheat на финале (Hamster 2.3M банов) | Pass 1 |
+| 8 | HiveOS-style pro-only complexity на главных экранах | Pass 3 |
+| 9 | Loot box для core progression (только для cosmetics) | Pass 2, Pass 5 |
+| 10 | Time-limited «last chance» FOMO pop-ups | Pass 5 |
+
+## Дальше
+
+<Cards>
+  <Cards.Card title="Финальный синтез" href="/game-mechanics/synthesis" arrow>
+    Если читать только одну страницу — читай эту. Топ-12 механик с конкретикой, cost curves, tech stack, 12-месячный план.
+  </Cards.Card>
+  <Cards.Card title="Pass 1: Telegram taps" href="/game-mechanics/pass-1-telegram-taps" arrow>
+    Post-mortems Hamster Kombat, Notcoin, Catizen. Что цеплялось, что убивало.
+  </Cards.Card>
+  <Cards.Card title="Pass 2: Idle/tycoon" href="/game-mechanics/pass-2-idle-tycoon" arrow>
+    Конкретные числа прогрессии, prestige-loop, multi-temporal generators.
+  </Cards.Card>
+</Cards>

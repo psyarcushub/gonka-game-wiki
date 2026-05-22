@@ -1,0 +1,190 @@
+---
+title: Pass 4 — GitHub open-source
+---
+
+import { Callout } from 'nextra/components'
+
+# Pass 4 — GitHub open-source примеры
+
+> Фокус: реальные репозитории, библиотеки, code patterns. Forkable стартеры. Конкретный технический стек.
+
+## Топ-15 репозиториев
+
+| # | Repo | Stack | Что брать |
+|---|---|---|---|
+| 1 | [IvarK/AntimatterDimensionsSourceCode](https://github.com/IvarK/AntimatterDimensionsSourceCode) | Vue.js + break_infinity.js | Reference idle архитектура: tick loop, prestige loop, save format, balance config — **эталон жанра** |
+| 2 | [Patashu/break_eternity.js](https://github.com/Patashu/break_eternity.js) | TS (lib) | Huge numbers до `10^^1e308` |
+| 3 | [Patashu/break_infinity.js](https://github.com/Patashu/break_infinity.js) | JS (lib) | Быстрее break_eternity, до `1e(9e15)`. Antimatter Dimensions ускорил **4.5× от decimal.js** |
+| 4 | [bitcraft3r/0xVenture-Capitalist](https://github.com/bitcraft3r/0xVenture-Capitalist) | Next.js 13 (app router), TS, Tailwind, Prisma, MongoDB, Zustand, Radix UI, Framer Motion | **Forkable starter №1** — ближе всех по жанру к Gonka |
+| 5 | [swarmsim/swarm](https://github.com/swarmsim/swarm) | CoffeeScript, AngularJS | Reference: server-synced ticker, config-driven units, prestige |
+| 6 | [OpenBuilders/notcoin-clicker](https://github.com/OpenBuilders/notcoin-clicker) | TS, React, Vite | **Официальный** Notcoin source. Production-grade TMA с energy, taps, scoring |
+| 7 | [nikandr-surkov/Hamster-Kombat-TMA-Clone](https://github.com/nikandr-surkov/Hamster-Kombat-Telegram-Mini-App-Clone) | Vite + TS + Tailwind | Чистая структура: `initial-setup` и `final-version` branches |
+| 8 | [nikandr-surkov/Notcoin-TMA-Clone](https://github.com/nikandr-surkov/Notcoin-Telegram-Mini-App-Clone) | Vite + TS + Tailwind | Animated text on click, energy refill |
+| 9 | [Telegram-Mini-Apps/nextjs-template](https://github.com/Telegram-Mini-Apps/nextjs-template) | Next.js, TS, @telegram-apps/sdk-react, TON Connect, Telegram UI | **Forkable starter №2** — официальный TMA шаблон с TON Connect |
+| 10 | [Telegram-Mini-Apps/reactjs-template](https://github.com/Telegram-Mini-Apps/reactjs-template) | React, tma.js, TS, Vite | Lightweight альтернатива nextjs-template |
+| 11 | [telegram-mini-apps-dev/TelegramUI](https://github.com/telegram-mini-apps-dev/TelegramUI) | React components | UI kit, мимикрирующий Telegram interface |
+| 12 | [richardmiraixai/Clicker-TMA](https://github.com/richardmiraixai/Clicker-Telegram-Mini-App) | React + TS + Vite + Node + Redis | Full-stack паттерн со server-side validation. **Защита от cheating** |
+| 13 | [adamwdraper/Numeral-js](https://github.com/adamwdraper/Numeral-js) | JS (lib) | Number formatting: `1.2k`, `3.4M`, locales |
+| 14 | [Aristona/Phaser.Adventure-Capitalist](https://github.com/Aristona/Phaser.Adventure-Capitalist) | Phaser 3 + TS | Reference: timer-based generators, managers, upgrades |
+| 15 | [kamenjan/idle-game-engine](https://github.com/kamenjan/idle-game-engine) | React | `withServerSyncedTicker.js` — SNTP-style sync для anti-cheat |
+| bonus | [thepaperpilot/The-Modding-Tree](https://github.com/thepaperpilot/The-Modding-Tree) | Vue, break_eternity.js | Prestige tree engine — для unlock graphs / tech tree |
+| bonus | [catrielmuller/adventure-capitalist-clone](https://github.com/catrielmuller/adventure-capitalist-clone) | Full-stack TS | Backend + frontend идлер. **Cloud save паттерн** |
+
+## Code patterns
+
+### State management — Zustand + persist + immer
+
+Доминирующий паттерн в современных TS-идлерах:
+
+```ts
+const useGameStore = create(
+  persist(
+    (set, get) => ({
+      coins: new Decimal(0),
+      nodes: [],
+      lastTick: Date.now(),
+      tick: () => set((s) => ({ coins: s.coins.plus(s.income) })),
+    }),
+    {
+      name: 'gonka-save',
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+)
+```
+
+Альтернативы: **Valtio** (mutable proxy, Vue-feel), **Redux Toolkit** (overkill для idle), **MobX**.
+
+### Offline progress calculation
+
+Канонический алгоритм:
+
+```ts
+const elapsedMs = Date.now() - state.lastSavedAt
+const ticks = Math.floor(elapsedMs / TICK_MS)
+const offlineGain = state.incomePerSecond.times(ticks * TICK_MS / 1000)
+state.coins = state.coins.plus(offlineGain)
+state.lastSavedAt = Date.now()
+```
+
+Варианты:
+- **Clicker Heroes** — без cap
+- **AdVenture Capitalist** — pro-rated offline rate (medium = 50% от online)
+- **0xVenture-Capitalist**: revenue → Zustand immediately, MongoDB sync every 30s
+
+### Currency formatting (3 уровня)
+
+| Уровень | Library | Когда |
+|---|---|---|
+| `1.23M`, `4.56B` | **Numeral.js** | до 1e15 |
+| `1.23 quintillion` | **swarm-numberformat** | scientific + named |
+| `10^^7.5e8` | **break_eternity.toString()** | tetration scale |
+
+Format selector в settings: `Short / Scientific / Engineering / Logarithm`.
+
+### Game tick loop — 3 модели
+
+| Модель | Используют | Trade-off |
+|---|---|---|
+| **60fps `requestAnimationFrame`** | Antimatter Dimensions, Phaser-based | Smooth, но throttled в background tab |
+| **1fps `setInterval`** | Большинство TMA-clones | Простота, hiccups при tab switch |
+| **Event-driven + WebWorker** | Idle Forge, IdleTimer.dev | Survives background throttling |
+
+**Best practice (Gonka)**: hybrid — UI ticks 60fps для animations, симуляция в WebWorker @ 10Hz, persist каждые 5 сек.
+
+### Save/load + cloud sync
+
+```
+localStorage['gonka:save:v1']        // основной save
+localStorage['gonka:save:backup']    // N-1 backup (anti-corruption)
+state.version                        // для migrations
+```
+
+Cloud sync: debounced upload (30-second batching в 0xVenture-Capitalist).
+
+### Achievement engine
+
+[`react-achievements`](https://www.npmjs.com/package/react-achievements) (npm) — semantic events + react-toastify + localStorage + confetti. Dual license. Альтернатива: catch-all reducer над game events.
+
+## Architecture patterns
+
+### Config-based > entity-based (80% репо)
+
+```ts
+// /src/data/nodes.ts
+export const NODE_TIERS = [
+  { id: 'rtx_3060', baseCost: 100,    baseHash: 1,    costGrowth: 1.15 },
+  { id: 'rtx_4090', baseCost: 10_000, baseHash: 50,   costGrowth: 1.20 },
+  // ...
+]
+```
+
+**Преимущество**: balance changes без code redeploy, A/B тесты, легко импортировать из Google Sheets через CSV. The Modding Tree доводит до экстремума — весь геймплей в data files, движок stateless.
+
+### Балансировка через config
+
+**Spreadsheet-driven workflow**: Google Sheets → CSV export → `data/balance.json` → runtime. Antimatter Dimensions хранит формулы (`1.07^Level`) прямо в config, parse при load.
+
+### Сезоны / прогресс
+
+- **Prestige reset** (Antimatter Dimensions, Modding Tree) — обнуление + keeping meta-currency
+- **Seasonal config swap** (Hamster Kombat) — `currentSeasonId` в state, server подсовывает свежий balance JSON
+- **Era tiers** (Adventure Capitalist) — конфиг с `unlockAtMilestone`
+
+**Для Gonka**: сезон = новый `nodeMarket.json` + `season_bonus_multiplier`, награды конвертируются в perm NFT/badges.
+
+## Конкретные библиотеки для использования
+
+| Назначение | Library | Почему |
+|---|---|---|
+| Huge numbers | **break_infinity.js** | Drop-in Decimal, 4.5× быстрее decimal.js. Если выйдете за 1e308 — switch на break_eternity |
+| Number formatting | **numeral.js** | Industry standard, locale support, custom formats |
+| State | **zustand** + `persist` + `immer` | Минимум boilerplate, отличная TS поддержка, persist middleware |
+| Animations | **framer-motion** (Motion) | Все TMA примеры используют. `motion.div` + `AnimatePresence` для tap-feedback |
+| Number animation | **@react-spring/web** или Motion `useSpring`+`useTransform` | Spring physics дают «money go brrr» feel |
+| Charts | **Recharts** (типичные), **Visx** (custom trading-style) | Recharts: до 10k points, declarative; Visx: low-level D3 control |
+| TON wallet | **@tonconnect/ui-react** | Официальная SDK, `useTonAddress` / `useTonWallet` hooks |
+| TMA SDK | **@telegram-apps/sdk-react** | Современный maintained, `useTelegramMock` для dev outside TG |
+| UI kit | **@telegram-apps/telegram-ui** | Native Telegram look — critical для perceived legitimacy |
+| Sound | **use-sound** | Lightweight hook, sprite support |
+| Achievements | **react-achievements** | Готовое решение (license non-commercial — free) |
+| Background timer | **idletimer.dev** или custom WebWorker | Survives background throttling |
+
+## Топ-5 forkable starting points
+
+1. **[Telegram-Mini-Apps/nextjs-template](https://github.com/Telegram-Mini-Apps/nextjs-template)** — official base, TON Connect built-in, `useTelegramMock` для dev. **Recommended foundation.**
+2. **[bitcraft3r/0xVenture-Capitalist](https://github.com/bitcraft3r/0xVenture-Capitalist)** — ближе всех по жанру (idle + crypto-flavored + Zustand + Framer Motion + MongoDB). Fork → swap businesses на GPU nodes.
+3. **[nikandr-surkov/Hamster-Kombat-TMA-Clone](https://github.com/nikandr-surkov/Hamster-Kombat-Telegram-Mini-App-Clone)** (`final-version` branch) — быстрый MVP с tap-loop, energy, daily rewards.
+4. **[OpenBuilders/notcoin-clicker](https://github.com/OpenBuilders/notcoin-clicker)** — production-quality, протестировано на миллионах юзеров. Reference для performance + TG WebApp integration.
+5. **[thepaperpilot/The-Modding-Tree](https://github.com/thepaperpilot/The-Modding-Tree)** — если делать акцент на tech tree / unlock graph (GPU lab → cluster → datacenter).
+
+## Anti-patterns в open source (что НЕ делать)
+
+1. **Reading wall-clock time без monotonic backup** — exploit: юзер переводит системное время вперёд, claim offline rewards. Mitigation: server-signed timestamp или TON-блокчейн attestation.
+2. **`JSON.stringify` Decimal без custom replacer** — теряется precision. break_infinity exports `toJSON()`/`fromJSON()` — используйте.
+3. **`setInterval(tick, 16)` без catchup logic** — при frame drops доход недополучается. Pattern: `delta = now - lastTick`, multiply income on delta.
+4. **Monolithic component для всех апгрейдов** — встречается в Cookie Clicker / reactclicker. Re-renders бьют по перфу. Solution: selector subscriptions из Zustand + memoized `<UpgradeRow />`.
+5. **Save без versioning** — 80% TMA clone-репо. Любое balance изменение ломает saves. Решение: `state.schemaVersion` + migration functions.
+6. **Tap event listener без rate-limit** — `tap-mini-app-click` и forks. Cheat-easy автокликерами. Notcoin/Hamster — server-side rate validation.
+7. **Hardcoded balance constants по codebase** — Cookie Clicker clones. Решение: central `data/balance.ts`.
+8. **Pixel-perfect copying чужих игр (Hamster/Notcoin clones)** — legal risk + commodity. Берите паттерны, не assets.
+
+## Источники
+
+- [idle-game · GitHub Topics](https://github.com/topics/idle-game)
+- [incremental-game · GitHub Topics](https://github.com/topics/incremental-game)
+- [HipHopHuman game-loop gist](https://gist.github.com/HipHopHuman/3e9b4a94b30ac9387d9a99ef2d29eb1a)
+- [Welcome Back mechanic in React (edvins.io)](https://edvins.io/rebuilding-the-welcome-back-mechanic-from-idle-games-in-react)
+- [Idle Game Illusion (geekextreme.com)](https://www.geekextreme.com/idle-games-offline-progression-math/)
+- [Math of Idle Games Part III (Kongregate)](https://blog.kongregate.com/the-math-of-idle-games-part-iii/)
+- [Zustand persist docs](https://zustand.docs.pmnd.rs/reference/integrations/persisting-store-data)
+- [@tonconnect/ui-react npm](https://www.npmjs.com/package/@tonconnect/ui-react)
+- [TON Connect for React docs](https://docs.ton.org/develop/dapps/ton-connect/react)
+- [react-achievements npm](https://www.npmjs.com/package/react-achievements)
+- [Motion AnimateNumber](https://motion.dev/docs/react-animate-number)
+- [Animated Counter recipe (BuildUI)](https://buildui.com/recipes/animated-counter)
+- [Zustand vs Jotai vs Valtio 2025](https://www.reactlibraries.com/blog/zustand-vs-jotai-vs-valtio-performance-guide-2025)
+- [IdleTimer.dev](https://idletimer.dev/)
+- [Idle Forge — React Idle Template](https://d0mega.itch.io/idle-forge)
+- [Clicker Heroes Formulas Wiki](https://clickerheroes.fandom.com/wiki/Formulas)
+- [Spreadsheet-driven Economy Balancing (Game Developer)](https://www.gamedeveloper.com/design/my-approach-to-economy-balancing-using-spreadsheets)

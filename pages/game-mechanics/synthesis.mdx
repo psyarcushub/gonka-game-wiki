@@ -1,0 +1,385 @@
+---
+title: Синтез — рекомендации для Gonka
+---
+
+import { Callout, Steps, Cards } from 'nextra/components'
+
+# Финальный синтез — рекомендации для Gonka Game
+
+> Если читать только одну страницу из всего раздела — читай эту. Сводка из 5 проходов в конкретные решения.
+
+<Callout type="warning" emoji="🎯">
+**Главный тезис**: Gonka должна быть **гибридом 4 жанров одновременно** — tap-to-earn (для acquisition), idle tycoon (для core loop), portfolio strategy (для depth), DePIN dashboard (для truth-layer). Ни один жанр в одиночку не выдерживает D30+ удержания. Это уже доказали Hamster Kombat (-86% за 3 месяца), Pi Network (trust erosion), Axie Infinity (-99.5% за год). Микс — единственный путь.
+</Callout>
+
+## 1. Топ-12 механик — приоритетный список
+
+Каждая обоснована минимум двумя проходами.
+
+### Tier 1 — обязательно с MVP (must-have)
+
+#### 1. CEO-нарратив — единая метафора
+
+**Источник**: Pass 1 (Hamster Kombat CEO), Pass 3 (Salad Chef).
+
+**Что**: одна сильная метафора, переименовывающая всё техническое. Не «GPU», а **«Reactor»** / **«Forge»** / **«Lab»**. Не «hashrate», а **«Energy Output»**. Не «inference job», а **«Заказ»**.
+
+**Зачем**: Salad chef-framing держит юзеров в 2-3× дольше generic mining UI. Hamster взлетел не из-за tap-механики (она была у Notcoin), а из-за CEO-identity.
+
+**Правило**: придерживайся метафоры **во всех экранах**. Не миксуй «alchemist» + «factory» + «fleet commander».
+
+#### 2. Tap-to-mine как acquisition-only
+
+**Источник**: Pass 1 (Notcoin sunset признание), Pass 2.
+
+**Что**: тап — только первые 30 секунд. Каждый тап = «инференс-цикл» / hash. Через 5 минут разблокируется **passive PPH** (profit-per-hour), и тап становится бустером, не основной механикой.
+
+**Phase transitions** (явные, не скрытые):
+- Phase 1 (Day 0-7): **Solo Operator** — manual tap, manual выбор сети
+- Phase 2 (Day 7-30): **Network Builder** — automation, managers, optimal routing
+- Phase 3 (Day 30+): **Empire / DAO Era** — governance, treasury, strategic positioning
+
+#### 3. Cost curve 1.10-1.12 для массовой аудитории
+
+**Источник**: Pass 2.
+
+```ts
+node_cost(n) = base × 1.10^n      // удвоение каждые ~7 нод
+```
+
+1.10 (не индустриальный 1.15) → мягче для $20-аудитории, не отпугнёт. **«Buy 10 / Buy Max»** кнопки обязательны с дня 1.
+
+5 тиров hardware:
+
+| Tier | Карта | Cost (CC) | Hash +/s | Multiplier |
+|---|---|---|---|---|
+| 1 | T4 virtual | 100 | 1 | 1.08 |
+| 2 | A10 | 5,000 | 25 | 1.10 |
+| 3 | A100 | 250,000 | 1,500 | 1.12 |
+| 4 | H100 | 12M | 85,000 | 1.13 |
+| 5 | H200/B200 | 600M | 5M | 1.15 |
+
+Milestone bonuses: **5 нод одного типа** → ×2 multiplier, **25** → ×4, **100** → ×10.
+
+#### 4. Daily combo + cipher
+
+**Источник**: Pass 1 (Hamster Kombat).
+
+**Daily combo**: 3 правильных апгрейда в день (cooling mod + driver patch + workload assign) → bonus. **Решение шарабельно** — третьи Telegram-каналы будут постить утечки = parallel distribution.
+
+**Daily cipher**: Morse-tap на ноду (точка/тире) — задействует core tap-жест как puzzle. **«Network ping puzzle»**.
+
+#### 5. Streak freeze для uptime
+
+**Источник**: Pass 5 (Duolingo), Pass 2.
+
+**Uptime streak** ноды. 14 дней подряд online = bonus. **Streak freeze** = 1 запас на месяц — не наказывает за блэкаут. Гуманно, но липко. Duolingo: churn -19%, DAU +36% YoY.
+
+#### 6. Multi-network faction picker
+
+**Источник**: Pass 3 (Bittensor subnets как «sports league»), Pass 5 (Honkai banners).
+
+**Faction-select экран** в стиле «выбери класс»:
+- **Bittensor Inference Guild** — text/multimodal subnets
+- **Render Visualizers Brotherhood** — graphics workloads
+- **io.net Training Cartel** — large-batch tasks
+- **Akash Edge Coalition** — flexible cloud-hosted apps
+
+Per-faction: APR, current node count, твой rank. **Switch button с cooldown** 5-10 минут (как realloc в Bittensor). Награждай за угадывание next hot subnet (multiplier за раннюю миграцию).
+
+**Это уникальный для Gonka angle** — Salad/Helium/Render mobile app работают с одной сетью. У нас этот strategy layer **есть по архитектуре**.
+
+### Tier 2 — добавить в Beta-фазе
+
+#### 7. Compute Guilds с pooled rewards
+
+**Источник**: Pass 5 (Clash of Clans), Pass 2 (Hay Day async), Pass 1 (Notcoin squads).
+
+5-20 игроков делят workloads, как Hay Day neighborhoods делят derby points. Weekly competitions: какая гильдия замайнила больше. **Async visits** — посмотри ноду друга, бонус mystery box при первом визите дня.
+
+**Bridge to реальность**: гильдии — natural мост к staking pools в реальной сети (если архитектура позволяет).
+
+#### 8. Transparent tx-explorer ссылки
+
+**Источник**: Pass 3 (io.net).
+
+Каждый earned GONKA имеет **traceable origin** в Mini-App: «Earned: 0.42 GONKA from Bittensor Subnet 7 — [view tx ↗]». Кликабельно в Solscan/explorer.
+
+**Это контр-Pi-Network**. Превращает «слепое доверие» в **proof-based UX**. Усиливает retention через эффект «я владею чем-то реальным».
+
+#### 9. Helium-style hex-grid карта
+
+**Источник**: Pass 3.
+
+3D-glоbus (Mapbox или Three.js), хексы подсвечены по типу нагрузки:
+- 🔵 Bittensor inference
+- 🟠 Render frames
+- 🟢 io.net training
+- 🟡 Akash hosting
+
+Tap на гекс → попап с node stats + claim CTA. Размещение «узла» на карте + выбор специализации.
+
+**ВАЖНО**: rewards привязаны к **реальной утилизации**, не к «node exists». Иначе Helium overcompensation — поставили тысячи hotspots в пустые зоны, network inflation убила экономику.
+
+#### 10. Anti-FOMO battle pass (Marvel Rivals model)
+
+**Источник**: Pass 5.
+
+Купленный season pass **остаётся навсегда**, прогресс возможен после конца сезона. Не «купи сейчас или потерял». Marvel Rivals доминирует Steam Q1 2025.
+
+**Сезоны привязаны к реальным AI-событиям**:
+- «Season of Diffusion» (Sora 2 release)
+- «Season of Multimodal» (GPT-6 launch)
+- «Liberation Season» (open-source Llama 5)
+
+Бонусные rewards за compute определённых типов в сезон. Создаёт **organic engagement в Twitter/X** — каждый AI-news становится in-game event.
+
+### Tier 3 — добавить в Phase 3 (масштабирование)
+
+#### 11. Prestige loop с real-yield twist
+
+**Источник**: Pass 2 (Antimatter Dimensions 3-tier prestige).
+
+3 слоя:
+
+| Tier | Trigger | Reward |
+|---|---|---|
+| Network Migration | Раз в неделю | +1% efficiency per migration token |
+| Generation Reset | Раз в месяц | Открывает next-gen hardware (H100→H200→Blackwell) |
+| Empire Restart | Раз в quarter | Governance ascension, voting power в Gonka DAO |
+
+**Killer differentiator**: ascension = переход с testnet на mainnet contract. Игрок чувствует **real-world consequence prestige**. Этого нет ни у Cookie Clicker, ни у AdCap.
+
+#### 12. Dynamic NFT + SBT achievements
+
+**Источник**: Pass 5 (Star Atlas, Sequence).
+
+**Dynamic NFT для ноды**: метаданные обновляются с upgrades, completed inference, suffered downtime. Один token = неограниченная биография.
+
+**SBT achievements**: «First 1M tokens served», «Top 10 latency week 42» — non-tradable. Статус = skill, не deposit.
+
+**Cross-network identity**: SBT переносятся в Render / Akash / io.net через партнёрства. **Web3 compute resume** — Gonka становится «LinkedIn of DePIN compute».
+
+## 2. Архитектура game layer — слои
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  4. ИГРОВОЙ НАРРАТИВ — единая метафора, сезоны           │
+│     (Reactor / Forge / Lab + AI release calendar)        │
+├─────────────────────────────────────────────────────────┤
+│  3. СОЦИАЛЬНЫЙ СЛОЙ — Guilds, leaderboards, async visits │
+│     (Clash + Hay Day patterns)                          │
+├─────────────────────────────────────────────────────────┤
+│  2. ИГРОВАЯ ПРОГРЕССИЯ — 5 tiers, multipliers, prestige  │
+│     (Cookie Clicker math + Antimatter Dim 3-tier reset)  │
+├─────────────────────────────────────────────────────────┤
+│  1. РЕАЛЬНАЯ ЭКОНОМИКА — multi-network earnings          │
+│     (Bittensor + Render + io.net + Akash, real tx)       │
+└─────────────────────────────────────────────────────────┘
+```
+
+Каждый слой опирается на нижний. **Нельзя начать с нарратива** — без рабочей экономики игра рассыпется (Axie lesson). **Нельзя ограничиться экономикой** — без нарратива это HiveOS (pro-only complexity).
+
+## 3. Рекомендуемый tech stack
+
+**Источник**: Pass 4.
+
+### Foundation
+
+| Слой | Выбор | Почему |
+|---|---|---|
+| Framework | **Next.js 14 (Pages Router)** или App Router | Wiki уже на Nextra. Vercel-нативно. Можно SSG для главной, SSR для real-time экранов |
+| Starter | **[Telegram-Mini-Apps/nextjs-template](https://github.com/Telegram-Mini-Apps/nextjs-template)** | Официальный, TON Connect, useTelegramMock |
+| Reference fork | **[bitcraft3r/0xVenture-Capitalist](https://github.com/bitcraft3r/0xVenture-Capitalist)** | Idle + crypto + Zustand + Framer Motion — ближе всех |
+
+### Core libraries
+
+| Назначение | Library | Версия примера |
+|---|---|---|
+| Huge numbers | **break_infinity.js** | drop-in Decimal, 4.5× быстрее decimal.js |
+| Number format | **numeral.js** | `1.2k`, `3.4M`, locales |
+| State | **zustand** + `persist` + `immer` | Минимум boilerplate, отличная TS |
+| Animations | **framer-motion** (Motion) | `motion.div` + `AnimatePresence` для tap-feedback |
+| Spring numbers | **@react-spring/web** | «money go brrr» feel |
+| Charts | **Recharts** | до 10k points, declarative |
+| Background timer | **WebWorker** или **idletimer.dev** | Survives background throttling |
+
+### Telegram-specific
+
+| | Library |
+|---|---|
+| TON wallet | **@tonconnect/ui-react** |
+| TMA SDK | **@telegram-apps/sdk-react** |
+| UI kit | **@telegram-apps/telegram-ui** |
+
+### Architecture decisions
+
+- **Game tick**: hybrid — UI @ 60fps RAF для animations, симуляция в **WebWorker @ 10Hz**, persist каждые 5 сек
+- **Config-driven balance**: `data/balance.ts` импортирует из Google Sheets через CSV. A/B тесты через config swap
+- **Save versioning**: `state.schemaVersion` + migration functions с дня 1 (80% TMA clones ломаются без этого)
+- **Server-signed timestamps**: anti-cheat для offline progress — нельзя доверять `Date.now()`
+- **Optimistic UI** для claim-кнопок: «+X» сразу, tx confirmation в фоне
+
+## 4. Phased roadmap для game layer
+
+<Callout type="info">
+Этот roadmap наслаивается на **общий проектный roadmap** Gonka (см. [Дорожная карта](/knowledge-base/09-roadmap)). Принцип презентации сохраняется: **Инфраструктура первым. Валидация вторым. Геймификация последним.**
+</Callout>
+
+<Steps>
+
+### Phase 1 (Game prep, параллельно с R&D инфры — Days 0-90)
+
+Геймдев не строит код — но **готовит спецификации и подбирает референсы**.
+
+- ✅ Подобрать **метафору** (Reactor/Forge/Lab) — провести 3-5 интервью с целевой аудиторией
+- ✅ Прописать **наративный bible** (factions, lore, season themes)
+- ✅ Спроектировать **5-tier hardware ladder** с конкретными цифрами
+- ✅ Прототип **cost curves** в Google Sheets — балансировка офлайн
+- ✅ Выбрать референс fork (0xVenture-Capitalist) + TMA-template
+
+### Phase 2 (Beta game layer — Months 3-6, параллельно с платформой)
+
+MVP игрового слоя в beta-режиме. **Без airdrop, без token speculation**.
+
+- ✅ **Tap-to-mine onboarding** (первые 5 минут) + переход к passive PPH
+- ✅ **5 hardware tiers** + cost curves implemented
+- ✅ **Daily combo + cipher** механики
+- ✅ **Uptime streak + freeze** (Duolingo pattern)
+- ✅ **Single network adapter** интегрирован (соответствует Фазе 1 инфры — один адаптер)
+- ✅ **Tx-explorer transparency**: каждая reward кликабельна
+- ✅ Closed beta с 100-500 юзерами для калибровки cost curves
+
+### Phase 3 (Public launch — Months 6-9)
+
+- ✅ **Multi-network faction picker** (как минимум 2 сети)
+- ✅ **Hex-grid карта** (Helium-style)
+- ✅ **Compute Guilds** (Clash + Hay Day patterns)
+- ✅ **Leaderboards** (friend > global)
+- ✅ **Anti-FOMO battle pass** S1
+- ✅ **First season theme** привязанный к реальному AI-event
+- ✅ **Cosmetic-only IAP** (skins, frames для ноды) — никаких P2W
+- ✅ Public TGE — **только** после доказанной retention (D30 > 20%)
+
+### Phase 4 (Depth + scale — Months 9-12+)
+
+- ✅ **Prestige loop 3-tier** (Antimatter Dimensions pattern)
+- ✅ **Dynamic NFT для ноды** (Star Atlas pattern)
+- ✅ **SBT achievements**
+- ✅ **Cross-network identity** через партнёрства
+- ✅ **DAO governance** (Phase 3 проекта — Gonka DAO voting через owned NFT)
+- ✅ **AI generative loading screens** (GDC 2025 trend)
+- ✅ **Sezon rotation** на real AI calendar
+
+</Steps>
+
+## 5. Три уникальных angle — только Gonka
+
+Эти комбинации не делает никто. Это **moat** проекта.
+
+### Angle 1: Compute as Living Pet
+
+Catizen × Tamagotchi × Dynamic NFT.
+
+GPU-нода — не статичный сервер, а **существо с эволюционирующим состоянием**. Моргает, «устаёт», «радуется» большим job. Метаданные обновляются с uptime, suffered downtime, completed inference types. **Каждая нода — уникальная visual identity** (как Axie).
+
+**Почему ново**: DePIN показывает дашборды и графики. Никто не показывает ноду как character с personality.
+
+### Angle 2: Sezon = реальное AI-событие
+
+Marvel Snap делает cross-promotion через Disney+ премьеры. **Gonka делает через AI release calendar.**
+
+- Sora 2 release → «Visual Frontier Season»
+- GPT-6 launch → «GPT Frontier Season»
+- Open-source Llama 5 → «Liberation Season»
+
+В сезон — bonus rewards за определённые типы compute + dedicated leaderboards.
+
+**Почему ново**: связь игры с актуальной AI-индустрией создаёт **organic engagement в Twitter/X** — каждый AI-news становится in-game event. Виральная петля без рекламы.
+
+### Angle 3: LinkedIn of DePIN compute
+
+Compute Guilds (Clash) + portable identity через SBT.
+
+Repute и achievements конкретной ноды переносятся в **Render / Akash / io.net** через партнёрства. Игрок строит «**Web3 compute resume**». Gitcoin Passport pattern, но для compute reliability.
+
+**Почему ново**: сегодня DePIN-сети — изолированные островки. Объединить identity через SBT превращает Gonka в **LinkedIn DePIN-compute**. Player ROI: репутация работает на меня везде, не только в Gonka.
+
+## 6. Anti-patterns checklist (NO-LIST)
+
+<Callout type="error" emoji="⛔">
+Эти 12 паттернов **запрещены** в Gonka. Каждый разбил какой-то проект.
+</Callout>
+
+- [ ] **НЕ** пытаться сразу Phase 3 (геймификация) до доказанной экономики. *Презентация декларирует, держим линию.*
+- [ ] **НЕ** обещать life-changing airdrop. *Hamster: 88.75% claim + скрытый vesting → -70% за неделю.*
+- [ ] **НЕ** скрывать vesting cliffs в TGE. *Сразу прозрачно — иначе backlash.*
+- [ ] **НЕ** хищный anti-cheat в финале. *Hamster забанил 2.3M юзеров → repuation kill.*
+- [ ] **НЕ** AI slop art. *Web3-аудитория читает это как «low effort».*
+- [ ] **НЕ** делать tap-to-earn долговечной механикой. *Notcoin сами признали — модель мертва после airdrop.*
+- [ ] **НЕ** mandatory rewarded ads в core loop. *Аудитория $20+ не терпит ad-mining.*
+- [ ] **НЕ** pure P2W premium currency. *Только QoL и cosmetics. F2P чувствуют «lesser citizens» = churn.*
+- [ ] **НЕ** loot box для core progression. *Только косметика. Иначе gambling-game first.*
+- [ ] **НЕ** time-limited «last chance» FOMO pop-ups. *Marvel Rivals критика.*
+- [ ] **НЕ** Pi Network «fake mining». *Показываешь работу — она должна реально что-то делать.*
+- [ ] **НЕ** Helium overcompensation. *Rewards привязаны к реальной утилизации, не к «node exists».*
+
+## 7. Метрики успеха (KPIs)
+
+Из Pass 2 (idle benchmarks) + Pass 1 (TMA реальность) + Pass 5 (Gen Z metrics):
+
+### Retention (target tiers)
+
+| Метрика | Industry baseline | Tier-1 idle | Gonka цель |
+|---|---|---|---|
+| D1 retention | 40% | 40% | **45%+** |
+| D7 retention | 20% | 20% | **25%+** |
+| D30 retention | 10% | — | **15%+** *(перед public TGE)* |
+| MAU/DAU ratio | 5% (TMA average) | — | **15%+** *(target — выше TMA average)* |
+
+### Economy
+
+| Метрика | Цель | Источник |
+|---|---|---|
+| Burn / mint ratio | **>1.0** | Anti-Axie pattern |
+| % payment users | **>10%** (vs 3-5% индустрия, Catizen aspirational 30%) | Pass 1 |
+| ARPDAU | трекать после Phase 2 | Pass 1 |
+| Token volatility | менее 50% месячных колебаний после стабилизации | Pass 5 |
+
+### Engagement
+
+| Метрика | Цель |
+|---|---|
+| Avg session length | 5-15 минут (TMA-нативный диапазон) |
+| Sessions per day | 2-4 (Gen Z: 2.5) |
+| Streak day-30 (наличие 30-day streak) | >20% активных |
+| Guild membership | >50% активных к Month 9 |
+
+## Итог в одной мысли
+
+<Callout type="warning" emoji="🎯">
+**Не строить ещё один Hamster Kombat.** Строить **первую DePIN-игру, где экономика реальная, а игра поверх неё — настоящий продукт**. Hamster был пустотой с тапом. Notcoin признал, что тап-only мёртв. Gonka имеет то, чего у них не было — **реальную мульти-сетевую инфраструктуру под капотом**. Игровой слой — обёртка, которая делает её доступной, а не способ симулировать ценность, которой нет.
+</Callout>
+
+## Куда дальше
+
+<Cards>
+  <Cards.Card title="Pass 1: Telegram taps" href="/game-mechanics/pass-1-telegram-taps" arrow>
+    Детали по Hamster / Notcoin / Catizen
+  </Cards.Card>
+  <Cards.Card title="Pass 2: Idle/tycoon math" href="/game-mechanics/pass-2-idle-tycoon" arrow>
+    Конкретные cost curves, prestige loops
+  </Cards.Card>
+  <Cards.Card title="Pass 3: DePIN crossovers" href="/game-mechanics/pass-3-depin-crossovers" arrow>
+    Helium, Render, io.net, Salad
+  </Cards.Card>
+  <Cards.Card title="Pass 4: GitHub OSS" href="/game-mechanics/pass-4-github-oss" arrow>
+    15+ репозиториев, библиотеки, паттерны
+  </Cards.Card>
+  <Cards.Card title="Pass 5: UX 2025-2026" href="/game-mechanics/pass-5-ux-trends" arrow>
+    Battle pass, gacha, social, NFT, AI
+  </Cards.Card>
+  <Cards.Card title="← К общему анализу" href="/analysis" arrow>
+    Подробный обзор проекта
+  </Cards.Card>
+</Cards>

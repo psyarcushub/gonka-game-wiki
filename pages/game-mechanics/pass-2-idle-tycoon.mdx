@@ -1,0 +1,271 @@
+---
+title: Pass 2 — Idle / Tycoon механики
+---
+
+import { Callout } from 'nextra/components'
+
+# Pass 2 — Idle / Tycoon механики
+
+> Фокус: 13 лет отработанных формул прогрессии. Cookie Clicker, AdVenture Capitalist, Universal Paperclips, Idle Miner Tycoon, Antimatter Dimensions. **Конкретные числа, не общие слова**.
+
+## Универсальный idle-toolkit
+
+### 1. Cost = base × multiplier^n, income ≈ linear
+
+Физика жанра. Cost растёт **экспоненциально**, income — **линейно** (с upgrade-каскадами). Игрок никогда не достигает потолка — всегда следующий wall. Cookie Clicker мог бы быть бесконечным (700 buildings = 11.126 duovigintillion cookies), упирается только в `2^1024` лимит double-precision float.
+
+### 2. Prestige / Ascension loop — главная магия жанра
+
+Игрок добровольно сжигает прогресс ради permanent multiplier. Парадоксально аппетитно.
+
+| Игра | Prestige currency | Триггер |
+|---|---|---|
+| Cookie Clicker | Heavenly Chips, 1:1 от baked | Кубический cost: уровень N = N³ × 1 трлн all-time cookies. +1% CpS per level |
+| AdVenture Capitalist | Angel Investors | Функция от net worth |
+| Egg, Inc | Soul Eggs | +10% earnings каждый, ×1% per SE через Soul Food research |
+| Antimatter Dimensions | **3 слоя**: Infinity → Eternity → Reality | Каждый открывает новую sub-mini-game |
+| Tap Titans 2 | Relics | 1 per 1000 hero levels + bonus per stage |
+
+### 3. Multiplier stacking (мультипликативность всегда > аддитивности)
+
+Late game в Cookie Clicker — это **не покупка зданий**, а unlock multipliers (upgrades, sugar lumps, season bonuses, prestige). Цель — 1.5× → 2× → 10× → 100× каскады.
+
+### 4. Offline earnings — delta-time
+
+```
+earnings = current_income_per_second × (now - last_session_ts)
+```
+
+Vulnerable to clock cheating. Решение для Web3: server-signed timestamp + cap (Idle Miner Tycoon: 2-24h, дальше paid time-warp). Cap создаёт FOMO: «не зайду через 12ч — теряю».
+
+### 5. Hard wall → buy upgrade → easy loop
+
+Главный micro-цикл удержания (15-60 сек early, часы late):
+1. Прогресс упирается в exponential wall
+2. Player покупает upgrade / unlock milestone (25, 50, 100, 200 buildings в AdCap)
+3. Production вырастает в 2-10×, новый wall далеко
+4. → repeat
+
+### 6. Currency stack
+
+| Слой | Зачем | Пример |
+|---|---|---|
+| **Soft** | Core gameplay | Cookies, money, eggs |
+| **Hard / Premium** | $/skip cooldown, cosmetics | Gems, golden eggs |
+| **Prestige** | Persistent boost через ascensions | Heavenly Chips, Soul Eggs |
+
+### 7. Managers / Automation
+
+Краеугольный «perceived value»: игрок начинает с активного клика → покупает «manager» который автоматизирует → перестаёт кликать. Чувство перехода **от effort к passive** — мощный dopamine trigger.
+
+## Конкретные числовые паттерны
+
+### Industry-standard cost multiplier
+
+| Игра | Multiplier | Тип |
+|---|---|---|
+| Clicker Heroes | **1.07** | мягкий |
+| AdVenture Capitalist | **1.07-1.15** | varies per business |
+| Cookie Clicker | **1.15** | каноничный |
+| Steam Monster | до **2.5** | специально жёсткий |
+| **Sweet spot mass-market** | **1.07-1.15** | balanced |
+
+**Почему 1.07-1.15**: Cookie Clicker формула, цена удваивается каждые **5 buildings** (при 1.15) и каждые **10** (при 1.07). Значит игрок видит significant visible progress **каждые 5-10 покупок** — оптимальная dopamine cadence. Меньше `1.05` = runaway инфляция, больше `1.2` = фрустрация.
+
+### Cookie Clicker income vs cost — diminishing efficiency
+
+- Base costs +**5x per tier** (новое здание = 5× предыдущего)
+- Income rates +**33% per tier** (новое даёт 33% больше)
+- **Каждое новое здание менее cost-efficient** на момент unlock — но открывает multiplicative upgrades, бустящие old buildings
+
+### Wall density
+
+| Phase | Между upgrades | Cadence |
+|---|---|---|
+| Early (Day 1) | 15-60 сек | Tight feedback |
+| Mid (Day 2-7) | 10-30 мин | Часовые check-ins |
+| Late (Day 30+) | Weekly milestones | Ascension в днях/неделях |
+
+**Multiplier purchase milestones** (AdCap каноничная схема): **25, 50, 100, 200, 300, 400, 500** owned → strong multipliers (×2, ×4, ×6, ×8). «Психологические breakpoints» — игрок сам считает «ещё 7 до 50, ещё 50 до 100».
+
+### Bulk-buy формула (обязательна после mid-game)
+
+```
+total_cost(n more, owned k) = b × r^k × (r^n − 1) / (r − 1)
+max_buyable(currency c) = floor( log_r( c × (r−1) / (b × r^k) + 1 ) )
+```
+
+### Re-engagement через multi-temporal generators (Eric Guan)
+
+Разные generators на разных циклах:
+- «Cows» cap каждые **20 минут** (для бустеров, заходящих 5×/день)
+- «Creameries» cap каждые **5 часов** (для 2-3 check-ins/day)
+- «Shipyards» cap каждые **2 дня** (для casuals)
+
+**Playstyle differentiation без социального давления** — каждый успешен в своей категории.
+
+## Психология удержания
+
+### Numbers go up — дофамин ожидания
+
+Dopamine peaks during **anticipation**, не gratification. Idle игры используют это идеально — каждые 5-30 секунд visible progress.
+
+### Variable Ratio Reinforcement (Skinner Box)
+
+Golden cookies, random drops, lucky combo multipliers — **самый аддиктивный schedule**. **Этически рискованно** (slot-машины). Лучше **fixed-but-rare** (4-часовой golden cookie) чем slot-style («open this box, 5% chance»).
+
+### FOMO от offline progress
+
+«Вышел 8 часов — что пропустил?» Обратная FOMO: не пропустить limited event, а пропустить **gain**. Хороший дизайн: cap позволяет 4-24ч, дальше прогресс не теряется навсегда — просто не накапливается. Плохой: время-warp boost за деньги (Legend of Mushroom).
+
+### Reset paradox (prestige appeal)
+
+Почему люди добровольно жгут 5000 часов:
+- **Permanent boost** очевиден (10-100×)
+- **Speedrun new game** в 10-100× быстрее = «теперь я OP»
+- **Discovery of new layer** (Antimatter Dimensions Eternity открывает Time Studies tree)
+- **Identity / Status** — «Prestige Level 245»
+
+### Retention benchmarks (2025-2026)
+
+| Метрика | Индустрия mobile F2P | Idle games | Idle Miner Tycoon |
+|---|---|---|---|
+| D1 | 40% | ~40% | **75%** (almost 2× индустрии) |
+| D7 | 20% | ~20% | — |
+| D30 | 10% | ~10% | — |
+
+Секрет Idle Miner: tight 8-week MVP cycle, weekly updates × 160+, RPG mechanics поверх idle core.
+
+## Применимость к Gonka
+
+### GPU node = «building»
+
+```
+node_cost(n) = base_node_price × 1.10^n      // мягкий multiplier для $20-аудитории
+node_income(n) = base_hashrate × n × Π(multipliers)
+```
+
+**1.10** (не 1.15) → удвоение каждые **~7 нод** — мягче для массовой аудитории. **«Buy 10 / Buy Max»** обязательно с дня 1.
+
+### Managers = automation
+
+- **Auto-claim rewards** (paid upgrade, как accountants в AdCap)
+- **Auto-reroute** к самой profitable сети
+- **Auto-cooling** при temperature spike
+- **Auto-restart** при downtime
+
+Каждый = paid IAP или soft-currency upgrade. Конвертируют active в passive — main value prop.
+
+### Prestige — «Network Migration / Strategic Pivot»
+
+Игрок «распускает» текущий setup → **Reputation Tokens**. +1% efficiency per RT. Сжигает 200ч прогресса, но новый run проходит в 5-10× быстрее, открывает premium networks.
+
+**3 слоя prestige** (a la Antimatter Dimensions):
+
+| Тier | Trigger | Reward |
+|---|---|---|
+| **1. Network Migration** | Раз в неделю | Ребаланс между AI networks, +1% efficiency per migration token |
+| **2. Generation Reset** | Раз в месяц | Жжёт networks, открывает next-gen hardware (H100 → H200 → Blackwell) |
+| **3. Empire Restart** | Раз в quarter | Governance ascension, voting power в Gonka DAO |
+
+### Multipliers — efficiency mods
+
+Прямой gameplay-vocabulary, естественный для GPU:
+
+- **Thermal upgrade** (watercooling): +15% efficiency, -20% degradation
+- **VRAM expansion**: +25% applicable models
+- **Driver optimization research**: +10% throughput per tier, 50 tiers max
+- **PSU efficiency upgrade**: -20% power cost
+- **Overclock card** (active item): +50% throughput, +30% degradation per cycle
+
+Игрок видит **6-12 multipliers стакающимися** — sense of build-craft.
+
+### Currency stack для Gonka
+
+| Слой | Название | Назначение |
+|---|---|---|
+| **Soft** | Compute Credits | Зарабатывается uptime, тратится на upgrades. Никогда не пересекает реальные токены |
+| **Real / earned** | GNK (network token) | Withdrawable, реальная ценность. **НЕ Axie pattern**: deflationary sinks, limited mint |
+| **Prestige** | Reputation Tokens | Non-transferable, persist через resets, бустят earnings |
+| **Hard / IAP** | Gonka Gems | $/skip cooldowns, cosmetics, **никогда P2W-grind** |
+
+### Cost curves для Gonka (конкретные стартовые числа)
+
+| Tier | Карта | Cost (Compute Credits) | Hashrate +/s | Multiplier |
+|---|---|---|---|---|
+| 1 | T4 virtual | 100 | 1 | 1.08 |
+| 2 | A10 | 5,000 | 25 | 1.10 |
+| 3 | A100 | 250,000 | 1,500 | 1.12 |
+| 4 | H100 | 12M | 85,000 | 1.13 |
+| 5 | H200/B200 | 600M | 5M | 1.15 |
+
+5 тиров — sweet spot (Cookie Clicker имеет 20, но вводятся постепенно). Каждый tier стоит **50-100×** предыдущего, даёт **40-80×** income.
+
+**Milestone bonuses**:
+- каждые **5** нод одного типа → ×2 multiplier
+- каждые **25** → ×4
+- каждые **100** → ×10 (epic)
+
+### Offline для TMA-формата
+
+- **Cap: 12 часов** (можно бустить до 24ч через upgrade)
+- **80% efficiency offline** (не 100%) — мягкий, не наказание
+- Реальный mining работает 24/7 — поэтому **штрафовать offline нет смысла**. Лучше: **game-layer activities** (claim, optimize, vote) дают +20% bonus при daily login. Tap Titans 2 pattern — платят за внимание, не пугают потерями.
+
+## Топ-5 anti-patterns
+
+1. **Mandatory rewarded video ads в core loop.** «Watch ad to claim offline rewards» каждый раз = killer. Аудитория с GPU за $20+ не терпит ad-mining.
+2. **Pure pay-to-win premium currency.** Hard-валюта — это QoL и cosmetics, никогда «перепрыгнуть grinder». Иначе F2P чувствуют «lesser citizens» → churn в 2-3 недели.
+3. **Time-warp / battery / energy системы.** Paywall на любую активность. Disastrous для idle — противоречит core promise «play whenever».
+4. **Gacha/lootbox для core progression.** Если апгрейды прячутся за random pulls — это **gambling-game first, idle second**. Аудитория GPU enthusiasts хочет deterministic builds. Loot только для **косметики**.
+5. **Token-as-yield Ponzi (Axie lesson).** Solutions:
+   - **Sinks > Mints** (breeding, fees, governance staking burn)
+   - **Utility-first** (governance, network access), не yield-bearing
+   - **Skill-based distribution** (top leagues), не «5 мин/день = 500/мес»
+   - **Optional NFT layer** — entry free, NFT для энтузиастов
+
+## Уникальные angles (что большинство idle-разработчиков пропускает)
+
+### Real-yield prestige (killer differentiator Gonka)
+
+Все prestige — pure abstract numbers (Heavenly Chips). Gonka может **слить два слоя**: prestige reset даёт **больше реальной валюты per hour** в новой жизни. «Ascension» = «переход с testnet на mainnet contract». Игрок чувствует **real-world consequence prestige** — unique tension, которой нет ни у Cookie Clicker, ни у AdCap.
+
+### Multi-temporal progression (недо-эксплуатируется)
+
+Разные node generations работают на разных циклах: T4 cap каждый час, A100 каждые 6 часов, H200 каждые 2 дня. **Casual whale** (1×/неделю) не отстаёт от daily grinder — играет другой layer. Большинство idle делают это формально, не системно. **Idle UX accessibility** для широкой аудитории.
+
+### Sim-truth verification (anti-cheat + storytelling)
+
+Все idle игры — fakes. «Управляешь mining empire» — но симуляция в clientside JS. Gonka **имеет доступ к реальным GPU-данным**: hashrate, utilization, network demand, real token prices. **Показывать real-world data как game UI** — лидерборды настоящих top earners, network congestion как in-game event. Аудитория technical enough, чтобы оценить — но представлено как игра.
+
+### Coop без adversarial PVP (Hay Day lesson)
+
+«Compute Guild» — 5-20 игроков делятся workloads, как Hay Day neighborhoods делят derby points. Weekly competitions: какая гильдия замайнила больше. Social retention drives D30+. **Гильдия = natural мост к staking pools** в реальной сети.
+
+### Narrative phases (Universal Paperclips trick)
+
+Universal Paperclips меняет gameplay 3 раза за прохождение (manufacturing → power → space). Gonka может имитировать:
+
+| Phase | Day | Mechanic |
+|---|---|---|
+| 1 — Solo Operator | 0-7 | Manual rigs, manual network choice |
+| 2 — Network Builder | 7-30 | Automation, managers, optimal routing |
+| 3 — Empire / DAO Era | 30+ | Governance voting, treasury, strategic positioning |
+
+Каждая phase открывает **новые механики**, не просто increased numbers. Бьёт по D30 retention сильнее, чем просто prestige.
+
+## Источники
+
+- [Universal Paperclips — Wikipedia](https://en.wikipedia.org/wiki/Universal_Paperclips)
+- [Cookie Clicker Mathematics](http://forum.dashnet.org/discussion/14628/the-mathematics-of-cookie-clicker)
+- [Cookie Clicker Ascension](https://cookieclicker.fandom.com/wiki/Ascension)
+- [Numbers Getting Bigger — Tuts+](https://code.tutsplus.com/numbers-getting-bigger-the-design-and-math-of-incremental-games--cms-24023a)
+- [Math of Idle Games (Anthony Pecorella, GDC Europe)](https://media.gdcvault.com/gdceurope2016/presentations/Pecorella_Anthony_Quest%20for%20Progress.pdf)
+- [Idle Game Design Principles (Eric Guan)](https://ericguan.substack.com/p/idle-game-design-principles)
+- [Idle Game Illusion (GeekExtreme)](https://www.geekextreme.com/idle-games-offline-progression-math/)
+- [Kolibri Games — Making a Hit Idle Game](https://www.gameanalytics.com/blog/making-a-hit-idle-game-eight-lessons-from-kolibri-games)
+- [Antimatter Dimensions Eternity](https://antimatter-dimensions.fandom.com/wiki/Eternity)
+- [Hay Day Monetization (Udonis)](https://www.blog.udonis.co/mobile-marketing/mobile-games/hay-day-monetization)
+- [Axie Infinity Growth Crises (Sage Journals)](https://journals.sagepub.com/doi/10.1177/20539517251357296)
+- [Achievement and Friends: Player Retention (arXiv)](https://arxiv.org/pdf/1702.08005)
+- [Mobile Game Retention Benchmarks 2026](https://investgame.net/wp-content/uploads/2026/01/2026-01-20-Mobile_retention_benchmarks_2026.pdf)

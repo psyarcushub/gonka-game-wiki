@@ -1,0 +1,191 @@
+---
+title: Pass 5 — UX-тренды 2025–2026
+---
+
+import { Callout } from 'nextra/components'
+
+# Pass 5 — Современные UX/прогрессия паттерны 2025-2026
+
+> Фокус: самые свежие тренды Web3 + mobile gaming. Battle pass, gacha, social, NFT, anti-farm, AI-генеративный контент, account abstraction.
+
+## Топ-15 актуальных трендов
+
+### Battle Pass — эволюция от FOMO к comfort retention
+
+**1. Marvel Rivals Anti-FOMO Battle Pass (дек 2024).** Купленный пасс остаётся **навсегда**, прогресс возможен после конца сезона. Разрыв с классическим Fortnite-FOMO. Marvel Rivals доминирует Steam-чартами Q1 2025 — модель работает.
+
+**2. Fortnite Old Battle Pass Vault (середина 2024).** Старые косметики возвращаются в магазин через 18 месяцев. Снижает FOMO, но сохраняет дефицит. Параллельно — non-linear progression (2025): игрок сам выбирает страницу наград.
+
+**3. Marvel Snap Cross-Universe Seasons.** Каждый месяц — новая тематика (Prehistoric Avengers → Marvel Zombies → Spider-Verse → Weapon X), привязанная к актуальным Disney+ премьерам. Конверсия зрителей сериалов в игроков.
+
+### Gacha — переход к transparent pity
+
+**4. Genshin Impact 90-pull hard pity + soft pity ~75 (актуально 2025).** Базовый шанс 0.6%, средняя цена 5★ ≈ **$333**. MDPI 2025: «pity приближает к gambling thresholds, но обеспечивает predictability».
+
+**5. Marvel Snap Snap Packs (апр 2025).** Гарантия **1 unowned card + 2 bonus rewards игрока на выбор**. Tokens (3000) при дубликатах. Прозрачнее предыдущей системы, но ARPDAU упал — пользователи устали от перетряхиваний экономики.
+
+**6. Honkai Star Rail rotating banners 3 weeks.** Дефицит через ротацию (а не сжигание контента). Пропустил — вернётся через месяцы.
+
+### Daily/weekly loops — Duolingo как gold standard
+
+**7. Duolingo streak as habit anchor.** Churn снизился с **47% до 28%**, DAU **+36% YoY 2025**. Юзеры с 7+ дневным streak в **2.3×** чаще заходят ежедневно. **Ключ: streak freezes + breaks = «sticky but humane»**.
+
+**8. Daily login → mini-quests → daily cap.** Catizen — мерч-механика + cross-game leaderboards + portal в другие mini-apps стала шаблоном TON-экосистемы H2 2025.
+
+### Social/clan mechanics
+
+**9. Clash of Clans 2025 social refresh.** Status indicators (зелёная точка online), emotes в чате, co-op events. Принцип: clan как «private chat + shared trophies + donation».
+
+**10. Hay Day asynchronous social farming.** Visit-bonus mystery box, газета с предложениями, derby challenges. Retention attribution конкретно этим фичам ($1.2B revenue).
+
+### Tokenomics + NFT 2025-2026
+
+**11. Axie Infinity Origins removed SLP rewards (2025).** Признание провала: 300M SLP/day минт vs 150M burn = 2:1 inflation = **-99.5% за год**. Новая модель: AXS (governance) + SLP (gameplay) + **bAXS (bound, контроль reward outflow)**.
+
+**12. STEPN GO M2E Revival (май 2025).** Dual-token: GST (unlimited, burns at 20-30× DAU) + GMT (capped 6B). Sustainable inflation control через target mint/burn ratio.
+
+**13. Dynamic NFTs as evolving assets.** Один токен = эволюционирующий character/asset. State changes без re-mint. Star Atlas использует **SBT для non-tradable achievements** («skill, not wealth defines status»).
+
+### Web3 UX и onboarding
+
+**14. EIP-7702 + Paymasters (май 2025, Pectra fork).** **87% транзакций используют paymasters в 2026**. EOA конвертируется в smart contract на одну транзакцию. **Session keys** = «подписал один раз, app действует от тебя». Убивает friction «connect wallet → sign → confirm gas».
+
+**15. AI-generative content (GDC 2025).** **50%+ студий используют generative AI**. Procedural levels reactive к skill, AI NPCs учатся на behavior, personalized progression curves. AI haptics — adaptive triggers под конкретный event.
+
+## Что работает у Gen Z (16-25) в 2026 — metrics
+
+| Метрика | Значение | Source |
+|---|---|---|
+| Avg session length | **22 мин × 2.5/день** | Quantum Run 2025 |
+| App opens / day | ~**4** раза | — |
+| Предпочтение micro-content | **73%** | Deconstructor of Fun |
+| Играют >3 ч/день | **65%** | — |
+| Бросают бренд после bad UX | **81%** | — |
+| Ценят PvP-дуэли | **59%** | — |
+| **Friend leaderboards > global** | Gen Z preference | — |
+
+**Главное**: толерантность к friction почти нулевая. Лояльность привязана к **экосистеме**, а не к одной игре. Long onboarding не выживает — нужен **«active fast, depth later»**.
+
+## Применимость к Gonka — mapping по 4 осям
+
+### Ось А: «Владеть GPU нодой»
+
+| Тренд | Mapping |
+|---|---|
+| **Dynamic NFT** | GPU-нода как эволюционирующий NFT: метаданные обновляются с upgrades, накопленным compute, completed inference. Один token, неограниченная биография |
+| **SBT achievements** | «First 1M tokens served», «Top 10 in latency week 42» — non-tradable badges. Star Atlas-модель: статус = skill, не deposit |
+| **Account abstraction** | Session keys для auto-restart ноды при downtime. Paymaster покрывает gas для reclaim. Пользователь не видит «approve transaction» |
+| **Marvel Snap Series Drop** | «Tier downgrade» старых GPU моделей: H100 → A100 → V100 как цены реальных карт падают. Прозрачная economy |
+
+### Ось B: «Соревноваться»
+
+| Тренд | Mapping |
+|---|---|
+| **Friend leaderboards** | Топ 100 нод среди friends **>** global (Gen Z preference). Weekly resets |
+| **PvPvE гибрид** | Кооп против «AI demand spikes» (PvE), но конкуренция за rewards (PvP). Sequence.xyz pattern |
+| **Honkai rotating challenges** | 3-недельные «compute tournaments» с тематиками (vision model week, LLM week, diffusion week) |
+| **Variable rewards** | Случайные «bounty tasks» с премиум-моделями inference в очереди |
+
+### Ось C: «Сезоны»
+
+| Тренд | Mapping |
+|---|---|
+| **Marvel Snap themed seasons** | «Season of Diffusion», «Season of Code», «Season of Multimodal» — привязка к реальным AI-trends месяца (Sora release, GPT-6 launch) |
+| **Battle Pass anti-FOMO** | Купленный season pass сохраняется forever, прогресс retroactively |
+| **Fortnite Crew subscription** | Monthly sub = free skin + bonus rewards + GONKA gems. Стабильная revenue + retention anchor |
+| **Worldbuilding lore** | «AI Networks» как фракции с историей: Inference Guild, Training Cartel, Edge Coalition. Cross-narrative |
+
+### Ось D: «Сообщество вокруг сетей»
+
+| Тренд | Mapping |
+|---|---|
+| **Clash of Clans clans** | «Compute Guilds» — pooled trophies, shared bounty, donations (одолжить compute другу на час) |
+| **Hay Day visits** | Async visit ноды друга → bonus при первом visit/day, mystery box за помощь с restart |
+| **Catizen discovery hub** | Gonka как hub: progress в Gonka разблокирует bonus в других DePIN-mini-apps (Helium, Render). Партнёрская экосистема |
+| **Duolingo streaks + freezes** | «Uptime streak» ноды. 14 дней подряд online = bonus. **Streak freeze** = 1 запас на месяц (humane, не наказывает за блэкаут) |
+
+## Этичные vs хищнические механики
+
+### 5 ЭТИЧНЫХ (применить в Gonka)
+
+1. **Transparent pity с soft+hard cap.** Игрок видит «до гарантированного epic GPU upgrade осталось 12 pulls»
+2. **Streak freeze + breaks.** Пропустил день — потратил freeze, не streak
+3. **Anti-FOMO ownership.** Battle pass прогресс не сгорает (Marvel Rivals 2024)
+4. **Cosmetic-only monetization.** Skins, frames, badges на ноду — не gameplay-bonus
+5. **Spending dashboard + cool-down.** История трат + warning при large purchase. UK/EU 2025 регулирование требует
+
+### 5 ХИЩНИЧЕСКИХ (избегать)
+
+1. **Time-limited «last chance» pop-ups.** Marvel Rivals критика: давление «купи сейчас»
+2. **Loot box с hidden probabilities.** FTC $245M settlement Fortnite 2025
+3. **Asymmetric daily quest pressure.** Гриндить или потерять прогресс. Marvel Snap ARPDAU drop именно из-за этого
+4. **P2E без non-economic value.** Axie -99.5% когда speculator-base ушёл. Sustainability требует FUN core
+5. **«Pay to fix» frustration design.** Намеренно тяжёлые challenges → платный shortcut
+
+## Топ-10 visual/UX моментов для виральности
+
+1. **5★ pity hit с pulsating gold aura + screen shake** (Genshin). Confetti, lights, slowdown. Для Gonka: «epic GPU upgrade unlocked» с particle storm
+2. **Marvel Snap haptic combo при card play.** XDA: «transcendent haptic experience». Применить: вибрация при completed inference batch
+3. **Pack opening anticipation: hesitation pause + reveal.** Hearthstone gold rare = золотое свечение пачки до открытия. Применить: GPU upgrade box
+4. **Marvel Snap «SNAP» doubling animation.** Один tap = вся таблица переворачивается. Виральность через момент-выбор. Применить: «boost compute» action
+5. **Duolingo end-of-lesson confetti + XP spin.** Простой, но cementing dopamine. Применить: end of compute session
+6. **Number go up — animated counter.** TON tap-to-earn: +1, +5, +100 floating numbers. Применить: real-time inference revenue tickers
+7. **Streak milestone celebration (7, 30, 100, 365).** Duolingo: special badge + share modal. Применить: «100-day uptime» exclusive badge
+8. **Leaderboard climb animation.** Smooth slide вверх с light trail. Применить: weekly compute rank
+9. **Clan/guild war start countdown.** Clash of Clans: cinematic intro. Применить: AI demand spike event
+10. **AI generative loading screens.** Generative AI создаёт unique loading art из stats игрока — уникальный shareable artifact = вирус. GDC 2025 trend
+
+**Шаблон share-trigger** (Plotline 2025): после wins/completions/milestones показывать share modal — конверсия share intent максимальна именно в момент гордости.
+
+## Уникальные angles — новый DePIN-gaming паттерн
+
+### Angle 1: «Compute as Living Pet» (Catizen × Tamagotchi × Dynamic NFT)
+
+GPU-нода — не статичный сервер, а **существо с эволюционирующим состоянием**: моргает, «устаёт», «радуется» большим job. Dynamic NFT обновляет визуал по аптайму, suffered downtime, completed types of inference. Игрок не управляет железом — он **«воспитывает существо»**. Каждая нода становится уникальной visual identity (как Axie).
+
+**Почему ново**: все DePIN сегодня показывают дашборды и графики. Никто не показывает ноду как character с personality. **Catizen-Tamagotchi pattern + Star Atlas SBT для wisdom level + Marvel Snap-style season skin**.
+
+### Angle 2: «Inference Tournament Seasons» с реальными AI-событиями
+
+Каждый месячный сезон — narrative вокруг **реального события AI-индустрии**:
+- Запуск GPT-6 = «GPT Frontier Season»
+- Sora 2 release = «Visual Frontier Season»
+- Open-source Llama 5 = «Liberation Season»
+
+В этот месяц определённые типы compute дают bonus rewards + leaderboards. **Marvel Snap cross-promotion model, но с реальным миром AI**.
+
+**Почему ново**: связь игры с актуальной AI-индустрией создаёт **organic engagement в Twitter/X** — каждый AI-news становится in-game event. Игроки делятся скриншотами «I served the first 1M Sora-2 inferences in my guild». Виральная петля без рекламы. **Marvel Snap делает это через Disney+ премьеры; Gonka может через AI release calendar**.
+
+### Angle 3: «Compute Guilds with Cross-Network Identity»
+
+Гильдии (Clash of Clans), но с **portable identity через soulbound tokens**. Repute и achievements конкретного компьютера переносятся в другие DePIN-сети партнёров (Render, Akash, io.net). Игрок строит «**Web3 compute resume**» — Gitcoin Passport pattern, но для compute reliability.
+
+**Почему ново**: сегодня DePIN-сети — изолированные островки. Объединить identity через SBT превращает Gonka в **the LinkedIn of DePIN compute**. Player ROI: репутация работает на меня везде, не только в Gonka. **Catizen-portal pattern, эволюционировавший в идентичность**.
+
+## Источники
+
+- [Marvel Rivals Anti-FOMO Battle Pass (Dexerto)](https://www.dexerto.com/marvel-rivals/marvel-rivals-anti-fomo-battle-pass-is-great-but-theres-one-major-issue-3039561/)
+- [Fortnite Old Battle Passes (VideoGamer)](https://www.videogamer.com/news/fortnite-old-battle-passes-return/)
+- [Designing Battle Pass Systems (Medium)](https://medium.com/@sitansu16/designing-battle-pass-systems-that-players-actually-love-4ed8a105303b)
+- [Genshin Impact Pity System (Game8)](https://game8.co/games/Genshin-Impact/archives/305937)
+- [Inherent Addiction Mechanisms in Gacha (MDPI 2025)](https://www.mdpi.com/2078-2489/16/10/890)
+- [Marvel Snap Snap Packs announcement](https://x.com/MARVELSNAP/status/1917235154726293822)
+- [Honkai Star Rail Banner Schedule (Game8)](https://game8.co/games/Honkai-Star-Rail/archives/408381)
+- [Duolingo Gamification Tactics (StriveCloud)](https://www.strivecloud.io/blog/blog-gamification-examples-boost-user-retention-duolingo)
+- [Psychology Behind Duolingo's Streak (Just Another PM)](https://www.justanotherpm.com/blog/the-psychology-behind-duolingos-streak-feature)
+- [Streaks for Gamification (Plotline)](https://www.plotline.so/blog/streaks-for-gamification-in-mobile-apps)
+- [Clash of Clans 2025 social refresh](https://supercell.com/en/games/clashofclans/blog/news/social-clan-improvements/)
+- [Hay Day Monetization Dissection (Udonis)](https://www.blog.udonis.co/mobile-marketing/mobile-games/hay-day-monetization)
+- [STEPN GO M2E Review](https://gamefipulse.com/2025/05/07/stepn-go-is-this-the-future-of-move-to-earn-gamefi/)
+- [Axie Infinity SLP/AXS Explained (DappRadar)](https://dappradar.com/blog/explained-axie-infinity-slp-and-axs-tokens)
+- [Dynamic NFTs Use Cases (Sei)](https://blog.sei.io/education/dynamic-nft-use-cases-beyond-jpegs-to-onchain-game-assets/)
+- [Account Abstraction Web3 Gaming (Blockus)](https://www.blockus.gg/blocks/account-abstraction-the-key-to-frictionless-web3-gaming)
+- [Soulbound Tokens in Web3 Gaming (Sequence)](https://sequence.xyz/blog/what-are-soulbound-tokens-web3-gaming)
+- [AI Game Development 2025 (Cosmic Meta)](https://cosmicmeta.io/2025/02/13/ai-in-game-development-procedural-generation-and-storytelling-in-2025/)
+- [Generative AI in Game Dev (IXIE)](https://www.ixiegaming.com/blog/ai-isnt-just-for-npcs/)
+- [Gen Z Gaming Statistics (SQ Magazine)](https://sqmagazine.co.uk/gen-z-gaming-platform-preferences-statistics/)
+- [Future of Gaming Engaging Gen Z (Deconstructor of Fun)](https://www.deconstructoroffun.com/blog/2025/04/07/the-future-of-gaming-engaging-gen-z)
+- [Dark Patterns in Mobile Games (Lost on Arrival)](https://lost-on-arrival.com/en/ethical-design/)
+- [Marvel Snap Haptic Transcendent (XDA)](https://www.xda-developers.com/marvel-snap-mobile-game-haptics/)
+- [Best DePIN Projects 2026 (TitanNet)](https://www.titannet.io/learn/basics/best-depin-projects-2026-top-decentralized-physical-infrastructure-networks)
+- [Telegram Mini Apps Bot Games 2026 (DailyGame)](https://www.dailygame.net/telegram-mini-apps-and-the-new-wave-of-bot-based-games-how-ton-gaming-reshaped-mobile-play-in-2026/)

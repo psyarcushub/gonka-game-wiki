@@ -1,0 +1,112 @@
+---
+title: Pass 1 — Telegram tap-to-earn
+---
+
+import { Callout } from 'nextra/components'
+
+# Pass 1 — Telegram tap-to-earn (2024-2026)
+
+> Фокус: что работало и что убило крупнейшие TG-кликеры. Прямые мэппинги на Gonka.
+
+## Контекст рынка — цифры, которые задают сцену
+
+- Telegram в 2025: **450M DAU / 950M MAU** — платформа сама больше любой Web3-игры.
+- **Hamster Kombat**: пик **300M юзеров (авг 2024)** → **41M (ноя 2024)** = **86% оттока за 3 месяца**, «260M player exodus».
+- **Catizen**: **39M юзеров / 800K платящих / ARPPU $33 / $34M revenue к дек 2024** — единственный, кто заработал реальные деньги.
+- **Notcoin**: **4.1M юзеров за неделю** (быстрее ChatGPT), **$0 ad spend**.
+- Тoken aftermath (май 2025): HMSTR **-70%**, NOT **-80%**, CATI **-93%**.
+- **MAU ≈ 5% от DAU** для большинства TG mini-apps — «миллион DAU» = реально удержано ~50K MAU.
+- Catizen аномалия: **30% payment rate vs 3-5% индустрия** — премиум-конец работает при правильном execution.
+
+## Топ-10 механик, которые работали
+
+| # | Механика | Игра-пример | Что брать |
+|---|---|---|---|
+| 1 | **CEO-нарратив** (role identity, не score) | Hamster Kombat — «вы CEO крипто-биржи» | Дать игроку идентичность — «вы Оператор GPU-фермы» |
+| 2 | **Daily combo** — 3 правильных апгрейда в день | Hamster Kombat | Daily optimization combo: cooling + driver + workload |
+| 3 | **Daily cipher** — Morse-tap (точка/тире) | Hamster Kombat, TapSwap | «Network ping puzzle» — задействует core tap-жест |
+| 4 | **Passive PPH** (profit-per-hour) | Hamster Kombat | Доход капает → идти claim — это и есть DePIN UX |
+| 5 | **Energy + boosters** | Notcoin, TapSwap, Yescoin | «Thermal/power budget» GPU |
+| 6 | **5-tier ladder** Bronze→Diamond | Notcoin | Gaming GPU → Workstation → Datacenter → Cluster |
+| 7 | **Двусторонние рефералы** (оба получают) | Notcoin — 4.1M за неделю на $0 | Не «дай мне бонус», а «оба получили» |
+| 8 | **Squads / гильдии** с лидербордами | Notcoin (+16% engagement, +25% LTV) | Compute Guilds = mining pools |
+| 9 | **Tap → Upgrade → Automation** | все успешные | Tap — только onboarding, не endgame |
+| 10 | **Portal-game** (внутри → другие игры) | Catizen, BOMBIE = $9.2M через её funnel | Gonka как gateway к нескольким DePIN-сетям |
+
+## Топ-5 провалов (что убило)
+
+1. **Vesting cliffs скрытые в TGE.** Hamster: только **88.75% claimable day-one**, остальное **vested 10 месяцев** — не было сказано upfront. Средний юзер получил **$1-4** после месяцев тапа. Backlash → -70%.
+
+2. **Hostile anti-cheat в худший момент.** Hamster забанил **2.3M юзеров** и забрал **6.8B HMSTR** прямо перед snapshot. Сметало даже легитимных. PR-урон необратим.
+
+3. **Shallow loops + AI slop art.** Hamster описывали как «shallow and repetitive» с «boring AI-generated visuals». Когда новизна умирает (~неделя 4) — под ней пусто. Notcoin team сами признали в 2025: **«tap-to-earn модель скорее всего мертва»**.
+
+4. **«Wen token» оптимизация над experience.** Игра существовала ради airdrop, не ради fun. После airdrop — наемные юзеры дампят, retention падает в ноль.
+
+5. **TON DEX liquidity cap.** Объёмы только **$3.8M/24h vs $9.1B индустрия**. Токены некуда продавать после airdrop. Платформенное ограничение, которое не решить на уровне отдельной игры.
+
+## Прямой mapping на Gonka
+
+<Callout type="info" emoji="🔄">
+**Принцип маппинга**: tap-to-earn механики ложатся на «владение GPU нодой» естественно. Tap = вычислительный цикл, daily combo = оптимизация настроек, лиги = классы железа, squads = mining pools.
+</Callout>
+
+| TG mechanic | Gonka equivalent | Почему работает |
+|---|---|---|
+| Tap-to-earn гигантскую монету | **Tap-to-mine: каждый тап = инференс-токен / hash cycle** | Жест диегетический — вы реально «работаете» |
+| Daily combo (3 карты) | **Daily optimization combo**: cooling + driver patch + workload assign | Прямо мэппится на реальные решения GPU-оператора |
+| Daily cipher (Morse) | **Network ping puzzle / latency challenge** | Тематический skill check |
+| Storage cap → claim | **Wallet capacity / payout threshold** | Это вообще нативно для DePIN — минимальный payout есть |
+| Energy refill | **GPU thermal budget** | «Карта перегрелась, остыть 2ч или купить cooling upgrade» |
+| Bronze→Diamond league | **Gaming GPU → Workstation → Data Center → Cluster Operator** | Стремленческая лестница в реальной таксономии железа |
+| Upgrade-карты | **Hardware mods, software (drivers, schedulers), сетевой выбор (Bittensor subnet, Render priority, Akash bid strategy)** | Каждая «карта» = реальный лëвер |
+| Tap-bot (Silver+) | **Auto-allocator на Tier 2**: автоматически перекидывает workload | Зеркалит реальный «yield aggregator» |
+| CEO биржи | **«Operator of Compute Farm»** identity | Та же сила role-identity |
+| Squads | **Mining pools / DAO clusters** | Концепт нативный — не приклеенный |
+| Catizen portal | **Gonka как gateway** к разным DePIN-сетям | Игрок выбирает Bittensor vs Render как «игру внутри игры» |
+
+## Anti-patterns — что НЕ переносить
+
+1. **Не обещайте life-changing airdrop.** Под-обещай, пере-выполни. Трогать не надо.
+2. **Не клейте anti-cheat в финале.** Закладывайте rate-limits и аномалии с дня 1, on-chain proofs для high-value actions.
+3. **Не AI-slop art.** Один сильный иллюстратор > generated visuals. Web3-аудитория читает «AI art» = «low effort».
+4. **Не делайте токен самоцелью.** Catizen зарабатывал на gameplay + IAP, не на token speculation.
+5. **Не gate utility за insider vesting.** Notcoin 78% к miners = бенчмарк; Hamster 11.25% скрытый vesting = anti-pattern.
+6. **Без offline/passive earnings — burnout.** Дайте игроку чувство «я progress-ю пока не играю».
+7. **5% MAU/DAU ratio — дизайн под week-4-юзера, не week-1.**
+
+## Неочевидные инсайты (то, что в обзорах пропускают)
+
+### (1) Leaked daily combo — это и есть виральность
+
+Hamster daily combo был виральным **не из-за награды**, а потому что **сторонние Telegram-каналы постили утечки** — становились параллельной distribution-сетью. Игра аутсорсила маркетинг. Для Gonka: дизайн ежедневной задачи так, чтобы **её решение было шарабельно** (скриншот, тред).
+
+### (2) Catizen 30% payment rate ≠ против Premium, а ИЗ-ЗА Premium
+
+**40% TG Premium юзеров играли в Catizen** — самоселекция платящих + Premium-perks. Gonka должна делать **tiered perks ровно под TG Premium / Stars**, а не охотиться за token speculation.
+
+### (3) «Grandma-proof» onboarding — главное в DePIN
+
+Titan Network вывод: technical DePIN apps выигрывают, когда первый screen — **«install, click start, done»**. Gonka $20 floor неважен, если первые 30 секунд не **глупо-простые**. **Спрятать всю GPU/network специфику за hamster-grade UI**, раскрывать глубину постепенно (Bittensor subnet picker открывается на Tier 2).
+
+### (4) Notcoin сами объявили смерть tap-to-earn — это значит, что это шеллл
+
+Notcoin pivot'нулся в «story-driven gaming». Они публично сказали — tap-to-earn dead. Это значит: **tap-to-earn — это известный временный acquisition layer**, не долговременный продукт. Gonka должна дизайнить с **явными phase transitions**: Phase 1 (tap acquisition) → Phase 2 (real DePIN bridge) → Phase 3 (compute marketplace) — так игроки не чувствуют предательства.
+
+### (5) Anti-cheat compliance как gamification
+
+Hamster bot-detection achievement высмеяли, но идея — **геймифицировать compliance** — гениальна. «Verified Human Operator» badge с реальными перками (priority workload, бонус-рефералка). **Делать легитимность статусом, не наказанием.**
+
+## Источники
+
+- [Hamster Kombat user decline (Bitcoinist)](https://bitcoinist.com/the-rise-and-fall-of-hamster-kombat-why-260-million-players-abandoned-the-game/)
+- [Crypto crash: HMSTR/NOT/CATI (BanklessTimes)](https://www.banklesstimes.com/articles/2025/05/08/crypto-crash-why-hamster-kombat-notcoin-and-catizen-plunged/)
+- [Notcoin virality masterclass (TON Blog)](https://blog.ton.org/virality-masterclass-notcoins-rise-to-4m-players)
+- [Catizen $34M revenue (Medium)](https://medium.com/@BlockchainLycan/catizen-reaches-34-million-users-how-this-tap-to-earn-game-dominates-telegram-f06151c11cff)
+- [Hamster Kombat vesting issue (Decrypt)](https://decrypt.co/250702/hamster-kombat-airdrop-allocations-cant-claim-all-tokens-day-one)
+- [Daily combo / cipher mechanics (KuCoin Learn)](https://www.kucoin.com/learn/crypto/how-to-earn-hamster-coin-with-daily-combo-and-daily-cipher)
+- [Notcoin league system (Boosty Labs)](https://boostylabs.com/blog/notcoin)
+- [TG mini-app metrics MAU/DAU (Monetag)](https://monetag.com/blog/telegram-mini-app-metrics/)
+- [TG game design trends (PixelPlex)](https://pixelplex.io/blog/viral-mechanics-on-telegram-apps/)
+- [io.net vs Akash vs Render comparison](https://io.net/blog/io-net-vs-akash-vs-render-network-which-decentralized-platform-actually-delivers)
+- [Titan Network onboarding lessons](https://www.titannet.io/learn/basics/best-depin-projects-2026-top-decentralized-physical-infrastructure-networks)
